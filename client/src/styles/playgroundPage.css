@@ -158,7 +158,7 @@
 }
 
 #playground-update-button {
-  font-size: 25px;
+  font-size: 22px;
   padding: 5px 10px;
   background-color: transparent;
   color: green;
@@ -170,13 +170,13 @@
 }
 
 #editor-font-size-input {
-  font-size: 22px;
+  font-size: 19px;
   margin-left: 20px;
 }
 
 #font-size-label {
   color: white;
-  font-size: 25px;
+  font-size: 22px;
   margin-left: 30px;
   min-width: fit-content;
   display: inline-block;
@@ -188,7 +188,7 @@
   margin-right: 20px;
   border-radius: 100px;
   transition: 0.3s;
-  font-size: 40px;
+  font-size: 35px;
   margin-left: auto;
 }
 
@@ -203,7 +203,7 @@
   background-color: #4cc713;
   display: inline-block;
   padding: 2px 6px;
-  font-size: 30px;
+  font-size: 26px;
   border-radius: 80px;
   margin-left: 20px;
   transition: 0.1s;
@@ -216,7 +216,7 @@
 
 #playground-sign-in-btn,
 #proxy-playground-homepage-button {
-  font-size: 22px;
+  font-size: 19px;
   margin-right: 20px;
   padding: 10px;
   border-radius: 50px;
@@ -233,7 +233,7 @@
 
 /*  Changeable Title styles */
 #changeable-title {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   display: block;
   width: 200px;
   margin-left: 20px;
@@ -248,38 +248,38 @@
     height: 80px;
   }
   .editor-options {
-    font-size: 25px;
+    font-size: 20px;
   }
   #font-size-label {
-    font-size: 28px;
+    font-size: 23px;
   }
 
   #editor-font-size-input {
-    font-size: 26px;
+    font-size: 21px;
   }
   #run-btn {
-    font-size: 28px;
+    font-size: 23px;
   }
 
   #changeable-title {
-    font-size: 36px;
+    font-size: 31px;
     max-width: 30%;
   }
 
   #playground-sign-in-btn {
-    font-size: 32px;
+    font-size: 27px;
     padding: 20px;
   }
 
   #buttonDownload {
-    font-size: 25px;
+    font-size: 22px;
   }
 
   #playgroundPage #buttonDownload {
-    font-size: 45px;
+    font-size: 35px;
   }
   #playground-navbar a {
-    font-size: 28px;
+    font-size: 23px;
     white-space: nowrap;
     width: fit-content;
     padding: 3px 8px;

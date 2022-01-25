@@ -1,6 +1,6 @@
 /* Landing Background Style */
 body {
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   padding: 0px;
   margin: 0px;
 }
@@ -23,12 +23,12 @@ div.landingPage {
 }
 
 .center h1 {
-  font-size: 80px;
+  font-size: 65px;
   margin-bottom: 5px;
 }
 
 .center h2 {
-  font-size: 40px;
+  font-size: 32px;
   font-weight: lighter;
   margin-top: 0px;
 }
@@ -37,7 +37,7 @@ div.landingPage {
 .btn-white {
   background-color: #fff;
   color: #444;
-  font-size: 32px;
+  font-size: 25px;
   margin: 10px auto;
 }
 
@@ -113,7 +113,7 @@ main#project-description-wrapper {
   width: 80%;
   min-height: 400px;
   height: fit-content;
-  padding: 10px 40px;
+  padding: 5px 20px;
   margin: 120px 0px 0px 0px;
   display: flex;
   box-shadow: 3px 0px 3px rgb(204, 204, 204), -3px 0px 3px rgb(204, 204, 204);
@@ -131,7 +131,7 @@ main#project-description-wrapper {
   display: block;
   width: 90%;
   height: auto;
-  padding: 20px;
+  padding: 10px;
 }
 
 .project-description .text {
@@ -139,7 +139,7 @@ main#project-description-wrapper {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
   width: 50%;
   margin: 10px;
 }
@@ -209,7 +209,7 @@ h2.how-to-title {
 }
 .arrow {
   margin: 0px 3px;
-  font-size: 1.6em;
+  font-size: 1.4rem;
   color: #444;
   display: inline-block;
 }
@@ -218,7 +218,7 @@ section .btn-purple {
   background-color: #5e00b1;
   color: #fff;
   margin: 80px auto;
-  font-size: 1.8rem;
+  font-size: 1.3rem;
 }
 
 .btn-purple::after {
@@ -296,7 +296,7 @@ footer .footer-buttons a:hover {
   }
 
   .project-description {
-    padding: 30px 100px;
+    padding: 15px 50px;
     flex-direction: column;
     min-width: 500px;
     width: 60%;
@@ -310,14 +310,14 @@ footer .footer-buttons a:hover {
   }
 
   .center h1 {
-    font-size: 2.9rem;
+    font-size: 2rem;
   }
   .center h2 {
-    font-size: 2.5rem;
+    font-size: 1.6rem;
   }
   .btn,
   .how-to-start-container .btn {
-    font-size: 1.8rem;
+    font-size: 1.2rem;
   }
 }
 
@@ -342,17 +342,17 @@ footer .footer-buttons a:hover {
     width: 100%;
   }
   .center > h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
   .center > h2 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
   .btn,
   .how-to-start-container .btn {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
   }
   body {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
   }
 }
 
@@ -364,7 +364,7 @@ footer .footer-buttons a:hover {
   }
   .project-description {
     border-radius: 0px;
-    padding: 0px 40px;
+    padding: 0px 20px;
   }
   .project-description img {
     width: 240px;
@@ -377,10 +377,10 @@ footer .footer-buttons a:hover {
     width: 80%;
   }
   .center > h1 {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
   }
   .center > h2 {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
   }
   footer .footer-buttons {
     flex-direction: column;
@@ -389,7 +389,7 @@ footer .footer-buttons a:hover {
 
 @media only screen and (max-width: 480px) {
   .navbar {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
   .navbar ul.buttons {
     flex-wrap: wrap;

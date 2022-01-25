@@ -6,7 +6,7 @@
   background-color: transparent;
   left: 0px;
   top: 0px;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 .navbar {
@@ -48,8 +48,8 @@
 
 a.logo {
   background: url("../img/code-logo.png") no-repeat center;
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   background-size: 80%;
 }
 

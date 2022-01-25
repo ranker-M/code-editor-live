@@ -9,7 +9,7 @@
 }
 
 #register-main h1 {
-  font-size: 55px;
+  font-size: 35px;
   color: black;
 }
 
@@ -34,7 +34,7 @@
   border: 1px solid rgb(211, 211, 211);
   width: 100%;
   margin: 10px 0px;
-  font-size: 25px;
+  font-size: 22px;
   padding: 8px 5px;
 }
 
@@ -43,11 +43,11 @@
   width: 100%;
   margin: 20px 0px;
   margin-bottom: 5px;
-  font-size: 30px;
+  font-size: 24px;
 }
 
 #register-wrapper #create-account {
-  font-size: 30px;
+  font-size: 24px;
   display: block;
   margin: 0px;
   margin-top: 20px;
@@ -75,7 +75,7 @@
 #register-main .click-btn {
   text-decoration: none;
   color: rgb(54, 54, 54);
-  font-size: 26px;
+  font-size: 22px;
 }
 #register-main .click-btn:hover {
   /* color: rgb(60, 86, 231); */
@@ -92,7 +92,7 @@
 
 #register-main #error-box {
   line-height: 1.3em;
-  font-size: 28px;
+  font-size: 22px;
   text-align: center;
   background-color: rgb(255, 0, 0);
   border-radius: 5px;
@@ -113,7 +113,7 @@
 
 #register-main #google-register-btn {
   padding: 8px 10px;
-  font-size: 28px;
+  font-size: 24px;
   width: 100%;
   background-color: white;
   margin-top: 30px;
