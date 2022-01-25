@@ -17,7 +17,7 @@
   width: 100%;
   padding: 0px;
   margin: 0px;
-  min-width: 560px;
+  min-width: 600;
   overflow: scroll;
   box-sizing: border-box;
 }
