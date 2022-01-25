@@ -9,7 +9,7 @@ const app = express();
 const path = require('path');
 
 // connect to mongodb
-const mongoDB_URI = process.env.MONGODB_URI;
+const mongoDB_URI = process.env.MONGODB_URI || "mongodb+srv://user:user123@cluster0.gzwr5.mongodb.net/live-code-share?retryWrites=true&w=majority";
 mongoose.connect(mongoDB_URI, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
@@ -189,8 +189,8 @@ app.put("/update-projectName/:username/:projectId", (req, res) => {
 var request = require('request');
 
 // define access parameters
-var accessToken = process.env.SPHERE_ENGINE_ACCESS_TOKEN;
-var endpoint = process.env.SPHERE_ENGINE_ENDPOINT;
+var accessToken = process.env.SPHERE_ENGINE_ACCESS_TOKEN || "34f7cac77abc1ec8752e7a47bcc7fdc6";
+var endpoint = process.env.SPHERE_ENGINE_ENDPOINT || "2702362c.compilers.sphere-engine.com";
 
 const compilers = {
     cpp: {
