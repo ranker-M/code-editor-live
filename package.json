@@ -8,6 +8,9 @@
     "build": "cd client && npm install && npm run build"
   },
   "keywords": [],
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "author": "",
   "license": "ISC",
   "description": "",
