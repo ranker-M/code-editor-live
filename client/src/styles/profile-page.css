@@ -1,0 +1,274 @@
+#profile-page {
+  width: 100%;
+  height: 100%;
+}
+#profile-wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-wrap: nowrap;
+  background-color: #eee;
+}
+#profile-navbar {
+  position: fixed;
+  background-color: white;
+  height: 80px;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  border-bottom: 0.5px solid #ccc;
+  align-items: center;
+  justify-content: center;
+}
+
+#profile-page-search-bar {
+  font-size: 30px;
+  border-radius: 50px;
+  padding: 5px 20px;
+  margin-left: 5%;
+  width: 50%;
+  min-width: 400px;
+  background-color: #eee;
+}
+
+#profile-page-search-bar::placeholder {
+  font-size: 26px;
+  color: #555;
+}
+
+#profile-main {
+  background-color: #eee;
+  height: fit-content;
+  width: 100%;
+  padding-top: 80px;
+}
+
+#menu-button {
+  display: inline-block;
+  font-size: 80px;
+  cursor: pointer;
+  position: fixed;
+  left: 18px;
+  top: 5px;
+  line-height: 0.9;
+  z-index: 1;
+  user-select: none;
+}
+#menu-button:active {
+  border: 1px solid rgb(48, 138, 255);
+}
+.bar1,
+.bar2,
+.bar3 {
+  width: 35px;
+  height: 5px;
+  background-color: #333;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+.open-menu {
+  display: block !important;
+}
+
+#profile-slider-menu {
+  box-sizing: border-box;
+  padding: 5px 10px;
+  position: fixed;
+  width: 400px;
+  height: 100%;
+  border-right: 1px solid #ccc;
+  background-color: white;
+  z-index: 1;
+  display: none;
+}
+
+#profile-navbar-logout-btn {
+  border: 1px solid #888;
+  border-radius: 35px;
+  /* position: fixed;
+  bottom: 25px; */
+  margin-top: auto;
+  transition: 0.2s;
+}
+#profile-navbar-logout-btn:hover {
+  background-color: #eee;
+}
+
+#profile-slider-menu #slider-menu-buttons-wrapper {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+#profile-wrapper a {
+  color: black;
+  text-decoration: none;
+  display: block;
+  padding: 8px 12px;
+  text-align: center;
+  margin-bottom: 5px;
+  user-select: none;
+}
+
+#profile-slider-menu .slider-btn:hover {
+  background-color: #ddd;
+}
+#profile-slider-menu #user-name {
+  margin-top: 30px;
+  margin-left: 80px;
+  margin-bottom: 60px;
+  font-size: 25px;
+  padding: 0px;
+  cursor: text;
+}
+#profile-slider-menu #user-name:hover {
+  background-color: inherit;
+}
+
+#profile-slider-menu #create-project {
+  background-color: green;
+  color: white;
+  border-radius: 100px;
+  transition: 0.2s;
+  margin-bottom: 30px;
+}
+#profile-slider-menu #create-project:hover {
+  background-color: rgb(0, 167, 0);
+}
+
+/* Create Project Screen */
+
+#project-window-wrapper {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(47, 47, 47, 0.349);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+#create-project-window {
+  background-color: white;
+  padding: 80px 60px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+#create-project-window button {
+  background-color: rgb(3, 199, 3);
+  color: white;
+  border-radius: 100px;
+  transition: 80ms;
+  font-size: 30px;
+  border: none;
+  box-shadow: 3px 3px 3px black;
+  padding: 10px 0px;
+  transition: 0.2s;
+}
+#create-project-window button:hover {
+  background-color: green;
+}
+
+#create-project-window button:active {
+  box-shadow: none;
+  transform: translate3d(3px, 3px, 0px);
+  background-color: rgb(0, 59, 0);
+}
+
+#create-project-window label {
+  margin-bottom: 5px;
+}
+#create-project-window input {
+  margin-left: 0px;
+  margin-bottom: 30px;
+  font-size: 30px;
+}
+
+#create-project-window select {
+  margin-left: 0px;
+  margin-bottom: 30px;
+  font-size: 26px;
+}
+
+/* Delete Project Screen */
+
+#delete-window-wrapper {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(47, 47, 47, 0.349);
+  display: none;
+  justify-content: center;
+  align-items: baseline;
+  z-index: 10;
+}
+
+#delete-project-window {
+  background-color: white;
+  margin-top: 5%;
+  padding: 80px 60px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+}
+
+#delete-project-window button {
+  font-size: 30px;
+  border: none;
+  padding: 10px 30px;
+  cursor: pointer;
+  margin-right: 5%;
+  width: fit-content;
+  border-radius: 5px;
+}
+#delete-project-button {
+  background-color: rgb(212, 0, 0);
+  color: white;
+  font-size: 30px;
+  border: none;
+  padding: 10px 30px;
+  width: fit-content;
+}
+#delete-project-button:disabled {
+  cursor: auto;
+  color: rgb(255, 191, 191);
+  background-color: rgb(114, 0, 0);
+}
+
+#delete-project-window label {
+  margin-bottom: 5px;
+}
+#delete-project-window input {
+  margin-left: 0px;
+  margin-bottom: 30px;
+  font-size: 30px;
+}
+
+#delete-project-window select {
+  margin-left: 0px;
+  margin-bottom: 30px;
+  font-size: 26px;
+}
+
+#delete-window-button-div {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+
+#delete-project-window h1 {
+  margin: 5px;
+}

@@ -1,0 +1,287 @@
+#playground-navbar a {
+  text-decoration: none;
+  color: white;
+  display: inline-block;
+  font-size: 25px;
+  white-space: nowrap;
+  width: fit-content;
+  padding: 5px;
+}
+#playground-page-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+#playgroundPage {
+  height: 100%;
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  min-width: 700px;
+  overflow: scroll;
+  box-sizing: border-box;
+}
+
+#playgroundPage::-webkit-scrollbar {
+  display: none;
+}
+
+#playground-main {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+}
+
+#code-editor-div {
+  margin: 0px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  font-size: 25px;
+}
+
+#compiler-div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  box-sizing: border-box;
+}
+#compiler-input-area {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  font-size: 30px;
+  font-family: monospace;
+  overflow: scroll;
+}
+#compiler-input-area:hover {
+  border-width: 1px;
+  border-style: solid;
+  border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+  border-image: initial;
+}
+#compiler-input-area:focus-visible {
+  outline: none;
+}
+
+#output-div {
+  background-color: rgb(8, 8, 8);
+  padding: 1% 1% 0px 1%;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  /* padding-bottom: 30px; */
+  color: #ddd;
+  font-size: 28px;
+  font-family: monospace;
+  overflow: scroll;
+}
+
+#output-div::-webkit-scrollbar {
+  display: none;
+}
+
+#compiler-input-area::-webkit-scrollbar {
+  display: none;
+}
+
+#output-div p {
+  margin-top: 0px;
+  white-space: pre-wrap;
+  /* word-wrap: break-word;
+  word-break: break-all; */
+  line-height: 2rem;
+}
+
+#output-time-span {
+  display: inline-block;
+  margin-top: 50px;
+  font-size: 24px;
+  font-style: italic;
+  margin-bottom: 30px;
+}
+
+.editor-options {
+  font-size: 20px;
+  margin-left: 30px;
+}
+
+/* #playgroundPage .cm-content {
+  white-space: normal;
+} */
+
+#playground-navbar {
+  height: 70px;
+  width: 100%;
+  background-color: #0a0a0a;
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #5c606e;
+}
+
+#navbar-div {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  margin: 0px !important;
+}
+
+#profile {
+  background: url("../img/user-profile.png") no-repeat center;
+  width: 65px;
+  border-radius: 30px;
+  height: 65px;
+  background-size: 100%;
+  display: inline-block;
+  background-color: inherit;
+  margin-right: 30px;
+}
+#profile:hover {
+  backdrop-filter: brightness(4);
+}
+
+/*  button styles */
+#playground-profile-page-button {
+  margin-right: 30px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#playground-profile-page-button:hover {
+  color: gold;
+}
+
+#playground-update-button {
+  font-size: 25px;
+  padding: 5px 10px;
+  background-color: transparent;
+  color: green;
+  border: none;
+  cursor: pointer;
+  transition: 0.5s;
+  margin-right: 20px;
+  /* background-color: orange; */
+}
+
+#editor-font-size-input {
+  font-size: 22px;
+  margin-left: 20px;
+}
+
+#font-size-label {
+  color: white;
+  font-size: 25px;
+  margin-left: 30px;
+  min-width: fit-content;
+  display: inline-block;
+}
+
+#playgroundPage #buttonDownload {
+  border: 1px solid transparent;
+  padding: 0px 10px 0px 10px;
+  margin-right: 20px;
+  border-radius: 100px;
+  transition: 0.3s;
+  font-size: 40px;
+  margin-left: auto;
+}
+
+#playgroundPage #buttonDownload:hover {
+  border-color: green;
+  color: green;
+}
+
+#run-btn {
+  text-decoration: none;
+  color: white;
+  background-color: #4cc713;
+  display: inline-block;
+  padding: 2px 6px;
+  font-size: 30px;
+  border-radius: 80px;
+  margin-left: 20px;
+  transition: 0.1s;
+}
+
+#run-btn:hover {
+  background-color: #34850f;
+  cursor: pointer;
+}
+
+#playground-sign-in-btn,
+#proxy-playground-homepage-button {
+  font-size: 22px;
+  margin-right: 20px;
+  padding: 10px;
+  border-radius: 50px;
+  border: 1px solid transparent;
+  width: 100px;
+  text-align: center;
+  transition: 0.2s;
+}
+#playground-sign-in-btn:hover,
+#proxy-playground-homepage-button:hover {
+  background-color: #242424;
+  border-color: white;
+}
+
+/*  Changeable Title styles */
+#changeable-title {
+  font-size: 1.8rem;
+  display: block;
+  width: 200px;
+  margin-left: 20px;
+  max-width: 30%;
+  color: white;
+  background-color: inherit;
+  border: none;
+}
+
+@media only screen and (min-width: 1925px) {
+  #playground-navbar {
+    height: 80px;
+  }
+  .editor-options {
+    font-size: 25px;
+  }
+  #font-size-label {
+    font-size: 28px;
+  }
+
+  #editor-font-size-input {
+    font-size: 26px;
+  }
+  #run-btn {
+    font-size: 28px;
+  }
+
+  #changeable-title {
+    font-size: 36px;
+    max-width: 30%;
+  }
+
+  #playground-sign-in-btn {
+    font-size: 32px;
+    padding: 20px;
+  }
+
+  #buttonDownload {
+    font-size: 25px;
+  }
+
+  #playgroundPage #buttonDownload {
+    font-size: 45px;
+  }
+  #playground-navbar a {
+    font-size: 28px;
+    white-space: nowrap;
+    width: fit-content;
+    padding: 3px 8px;
+  }
+}

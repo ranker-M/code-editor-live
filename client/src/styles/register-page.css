@@ -1,0 +1,126 @@
+#register-main {
+  height: 100vh;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #792bbd; */
+}
+
+#register-main h1 {
+  font-size: 55px;
+  color: black;
+}
+
+#register-wrapper {
+  box-shadow: 0px 0px 3px #777;
+  padding: 25px 50px;
+  height: fit-content;
+  width: 500px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  background-color: white;
+}
+#register-wrapper form {
+  width: 95%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+#register-wrapper input {
+  border: 1px solid rgb(211, 211, 211);
+  width: 100%;
+  margin: 10px 0px;
+  font-size: 25px;
+  padding: 8px 5px;
+}
+
+#register-wrapper label {
+  display: inline-block;
+  width: 100%;
+  margin: 20px 0px;
+  margin-bottom: 5px;
+  font-size: 30px;
+}
+
+#register-wrapper #create-account {
+  font-size: 30px;
+  display: block;
+  margin: 0px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  text-decoration: none;
+  color: white;
+  background-color: #53148a;
+  width: 100%;
+  padding: 16px 0px;
+  text-align: center;
+  border-radius: 10px;
+  transition: 0.1s;
+  cursor: pointer;
+}
+#register-wrapper #create-account:hover {
+  background-color: #350064;
+}
+
+#register-wrapper #create-account:disabled {
+  background-color: #18002c;
+  color: rgb(77, 77, 77);
+  user-select: none;
+  cursor: default;
+}
+#register-main .click-btn {
+  text-decoration: none;
+  color: rgb(54, 54, 54);
+  font-size: 26px;
+}
+#register-main .click-btn:hover {
+  /* color: rgb(60, 86, 231); */
+  text-decoration: underline;
+}
+
+#register-main .click-btn-div {
+  margin-top: 18px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0px;
+}
+
+#register-main #error-box {
+  line-height: 1.3em;
+  font-size: 28px;
+  text-align: center;
+  background-color: rgb(255, 0, 0);
+  border-radius: 5px;
+  color: white;
+  padding: 7px 10px;
+  display: none;
+}
+
+#register-main .register {
+  text-align: right;
+}
+
+#register-main #line-between-login {
+  width: 100%;
+  border-bottom: 1px solid rgb(173, 173, 173);
+  margin: 0px;
+}
+
+#register-main #google-register-btn {
+  padding: 8px 10px;
+  font-size: 28px;
+  width: 100%;
+  background-color: white;
+  margin-top: 30px;
+  color: rgb(253, 49, 49);
+  border: 1px solid rgb(253, 49, 49);
+  cursor: pointer;
+}
+#register-main #google-register-btn:hover {
+  background-color: rgb(255, 240, 240);
+}

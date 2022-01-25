@@ -1,0 +1,407 @@
+/* Landing Background Style */
+body {
+  font-size: 1.7rem;
+  padding: 0px;
+  margin: 0px;
+}
+div.landingPage {
+  background-color: rgb(245, 245, 245);
+}
+.landing-page-bg {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.center {
+  width: 60%;
+  color: white;
+  position: relative;
+}
+
+.center h1 {
+  font-size: 80px;
+  margin-bottom: 5px;
+}
+
+.center h2 {
+  font-size: 40px;
+  font-weight: lighter;
+  margin-top: 0px;
+}
+
+/*Landing Button Style*/
+.btn-white {
+  background-color: #fff;
+  color: #444;
+  font-size: 32px;
+  margin: 10px auto;
+}
+
+.btn:link,
+.btn:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 12px 35px;
+  display: inline-block;
+  border-radius: 100px;
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.4s;
+}
+
+.btn-white::after {
+  background-color: #fff;
+}
+
+.btn:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+
+.btn-animated {
+  animation: moveInBottom 5s ease-out;
+  animation-fill-mode: backwards;
+}
+
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+/* Section Styles */
+main#project-description-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.project-description {
+  background-color: white;
+  width: 80%;
+  min-height: 400px;
+  height: fit-content;
+  padding: 10px 40px;
+  margin: 120px 0px 0px 0px;
+  display: flex;
+  box-shadow: 3px 0px 3px rgb(204, 204, 204), -3px 0px 3px rgb(204, 204, 204);
+  justify-content: space-around;
+  align-items: center;
+}
+
+.small {
+  width: 80%;
+  min-height: 300px;
+  height: fit-content;
+}
+
+.project-description img {
+  display: block;
+  width: 90%;
+  height: auto;
+  padding: 20px;
+}
+
+.project-description .text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  width: 50%;
+  margin: 10px;
+}
+
+.project-description .image {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.little-logo {
+  max-width: 200px;
+}
+
+.project-description .text a {
+  text-decoration: none;
+  font-weight: 700;
+  color: #5e00b1;
+}
+
+.project-description .text a:hover {
+  color: #874cbb;
+}
+
+/* How to start using card Styles*/
+h2.how-to-title {
+  text-align: center;
+  padding: 20px;
+}
+
+.how-to-start-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 130px;
+}
+
+.card-container {
+  margin-top: 20px;
+  width: 95%;
+  height: 100%;
+  min-height: 400px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  width: 20%;
+  max-width: 350px;
+  height: 400px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: white;
+  box-shadow: 1px 0px 3px rgb(144, 144, 144), -1px 0px 3px rgb(204, 204, 204);
+  transition-duration: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-20px);
+}
+.arrow {
+  margin: 0px 3px;
+  font-size: 1.6em;
+  color: #444;
+  display: inline-block;
+}
+
+section .btn-purple {
+  background-color: #5e00b1;
+  color: #fff;
+  margin: 80px auto;
+  font-size: 1.8rem;
+}
+
+.btn-purple::after {
+  background-color: #5e00b1;
+}
+
+/* Footer */
+footer {
+  width: 100%;
+  height: fit-content;
+  padding: 5px 0px;
+  color: white;
+  margin-top: 150px;
+  background-color: #222;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+footer a {
+  text-decoration: none;
+  display: inline-block;
+  color: rgb(255, 255, 255);
+}
+footer p {
+  margin: 5px 0px;
+  padding: 10px;
+}
+footer a:hover {
+  color: rgb(96, 96, 255);
+}
+footer .footer-buttons {
+  display: flex;
+  padding: 5px 40px;
+  border-top: 1px solid white;
+}
+footer .footer-buttons a {
+  display: block;
+  padding: 5px 10px;
+}
+footer .footer-buttons a:hover {
+  color: #8300f5;
+}
+
+@media only screen and (max-width: 1625px) {
+  .card-container {
+    flex-wrap: wrap;
+  }
+
+  .card {
+    width: 50%;
+    max-width: 550px;
+    margin-top: 30px;
+  }
+
+  .arrow:nth-child(4) {
+    display: none;
+  }
+  .small img {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1385px) {
+  .navbar {
+    width: 90%;
+  }
+  .card-container {
+    flex-direction: column;
+  }
+
+  .arrow:nth-child(2n) {
+    display: none;
+  }
+
+  .project-description {
+    padding: 30px 100px;
+    flex-direction: column;
+    min-width: 500px;
+    width: 60%;
+  }
+  .project-description img {
+    width: 500px;
+    border-radius: 50px;
+  }
+  .project-description div.text {
+    width: 80%;
+  }
+
+  .center h1 {
+    font-size: 2.9rem;
+  }
+  .center h2 {
+    font-size: 2.5rem;
+  }
+  .btn,
+  .how-to-start-container .btn {
+    font-size: 1.8rem;
+  }
+}
+
+@media only screen and (max-width: 1025px) {
+  .navbar {
+    flex-direction: column;
+  }
+  .navbar ul.buttons {
+    border-top: 2px solid rgb(255, 255, 255);
+  }
+}
+@media only screen and (max-width: 768px) {
+  .project-description {
+    min-width: 100px;
+    width: 60%;
+  }
+  .project-description img {
+    width: 400px;
+    border-radius: 50px;
+  }
+  .project-description div.text {
+    width: 100%;
+  }
+  .center > h1 {
+    font-size: 3rem;
+  }
+  .center > h2 {
+    font-size: 1.5rem;
+  }
+  .btn,
+  .how-to-start-container .btn {
+    font-size: 1.3rem;
+  }
+  body {
+    font-size: 1.3rem;
+  }
+}
+
+@media only screen and (max-width: 625px) {
+  div.card {
+    width: 80%;
+    max-width: 400px;
+    padding: 0px 15px;
+  }
+  .project-description {
+    border-radius: 0px;
+    padding: 0px 40px;
+  }
+  .project-description img {
+    width: 240px;
+  }
+  .btn,
+  .how-to-start-container .btn {
+    font-size: 1rem;
+  }
+  .center {
+    width: 80%;
+  }
+  .center > h1 {
+    font-size: 2.5rem;
+  }
+  .center > h2 {
+    font-size: 1.3rem;
+  }
+  footer .footer-buttons {
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .navbar {
+    font-size: 1.4rem;
+  }
+  .navbar ul.buttons {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  .navbar ul.logo-side {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  .navbar h2 {
+    margin: 0px;
+  }
+}

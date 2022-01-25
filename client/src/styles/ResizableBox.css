@@ -1,0 +1,33 @@
+.resizable {
+  position: relative;
+  flex-shrink: 0;
+  max-width: 100vw;
+  max-height: 100vh;
+}
+.resizer {
+  /* All resizers are positioned absolutely inside the element */
+  position: absolute;
+  user-select: none;
+}
+
+/* Placed at the right side */
+.resizer-r {
+  cursor: col-resize;
+  height: 100%;
+  right: 0;
+  top: 0;
+  width: 10px;
+  background-color: rgb(70, 70, 70);
+  border: 1px solid rgb(119, 119, 119);
+}
+
+/* Placed at the bottom side */
+.resizer-b {
+  bottom: 0;
+  cursor: row-resize;
+  height: 10px;
+  left: 0;
+  width: 100%;
+  background-color: rgb(70, 70, 70);
+  border: 1px solid rgb(119, 119, 119);
+}

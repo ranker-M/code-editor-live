@@ -1,0 +1,58 @@
+/* Landing Page Navbar Styles */
+
+.wrapper {
+  width: 100%;
+  position: absolute;
+  background-color: transparent;
+  left: 0px;
+  top: 0px;
+  font-size: 1.5rem;
+}
+
+.navbar {
+  width: 70%;
+  margin: 0 auto;
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+}
+
+.navbar ul {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.navbar ul li a {
+  text-decoration: none;
+  color: white;
+  display: block;
+  padding: 20px;
+  white-space: nowrap;
+  transition: 1s;
+}
+
+.navbar ul li a:hover {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.logo-side :hover {
+  text-decoration: none !important;
+}
+
+a.logo {
+  background: url("../img/code-logo.png") no-repeat center;
+  width: 80px;
+  height: 80px;
+  background-size: 80%;
+}
+
+.logo-side li:first-child {
+  text-indent: -1000000px;
+}
