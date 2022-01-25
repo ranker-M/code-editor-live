@@ -243,6 +243,10 @@
   border: none;
 }
 
+.ͼ1 .cm-scroller::-webkit-scrollbar {
+  display: none;
+}
+
 @media only screen and (min-width: 1925px) {
   #playground-navbar {
     height: 80px;

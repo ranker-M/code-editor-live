@@ -10,7 +10,7 @@
   flex-wrap: nowrap;
   background-color: #eee;
   min-width: 450px;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 #profile-navbar {
   position: fixed;
