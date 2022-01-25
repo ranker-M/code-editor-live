@@ -6,6 +6,7 @@ body {
 }
 div.landingPage {
   background-color: rgb(245, 245, 245);
+  min-width: 325px;
 }
 .landing-page-bg {
   height: 100vh;
@@ -267,11 +268,12 @@ footer .footer-buttons a:hover {
 @media only screen and (max-width: 1625px) {
   .card-container {
     flex-wrap: wrap;
+    width: 70%;
   }
 
   .card {
     width: 50%;
-    max-width: 550px;
+    max-width: 400px;
     margin-top: 30px;
   }
 
@@ -296,21 +298,22 @@ footer .footer-buttons a:hover {
   }
 
   .project-description {
-    padding: 15px 50px;
+    padding: 15px 35px;
     flex-direction: column;
-    min-width: 500px;
-    width: 60%;
+    min-width: 400px;
+    width: 50%;
+    font-size: 1.2rem;
   }
   .project-description img {
     width: 500px;
     border-radius: 50px;
   }
   .project-description div.text {
-    width: 80%;
+    width: 90%;
   }
 
   .center h1 {
-    font-size: 2rem;
+    font-size: 3rem;
   }
   .center h2 {
     font-size: 1.6rem;
@@ -338,6 +341,12 @@ footer .footer-buttons a:hover {
     width: 400px;
     border-radius: 50px;
   }
+  div.card {
+    height: 300px;
+  }
+  div.card h4 {
+    margin-bottom: 0px;
+  }
   .project-description div.text {
     width: 100%;
   }
@@ -349,10 +358,10 @@ footer .footer-buttons a:hover {
   }
   .btn,
   .how-to-start-container .btn {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
   }
   body {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
   }
 }
 
@@ -388,6 +397,9 @@ footer .footer-buttons a:hover {
 }
 
 @media only screen and (max-width: 480px) {
+  div.card {
+    height: 400px;
+  }
   .navbar {
     font-size: 1.3rem;
   }

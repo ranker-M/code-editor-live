@@ -28,7 +28,6 @@ const ProxyPlayground = (props) => {
             setProjectName(projectName);
             console.log(proxyProject);
         }
-
     }, [])
 
     useEffect(() => {

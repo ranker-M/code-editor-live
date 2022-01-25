@@ -35,7 +35,6 @@ const Playground = (props) => {
                     setCode(project.text);
                     setProjectName(project.projectName);
                     setlanguage(project.language);
-                    console.log(project.language);
                 })
                 .catch(err => {
                     console.log(err);
@@ -45,6 +44,7 @@ const Playground = (props) => {
                 setRenderState(!renderState);
             }, 100);
         }
+
     }, [renderState]);
 
     function parentProjectName(newName) {
@@ -129,7 +129,6 @@ const Playground = (props) => {
                     });
             }).
             catch(err => {
-                console.log(err.response)
                 setMessageBox(err.response.data, "red");
             });
     }
@@ -147,23 +146,23 @@ const Playground = (props) => {
                         projectId={params.projectId}
                     />
 
-                    {window.screen.width > 850 && <select defaultValue={theme} onChange={selectTheme} className="theme-select editor-options" key={"theme options"}>
+                    <select defaultValue={theme} onChange={selectTheme} className="theme-select editor-options" key={"theme options"}>
                         {optionList.themes.map(el =>
                             <option key={el}>{el}</option>
                         )}
-                    </select>}
+                    </select>
 
-                    {window.screen.width > 850 && <select defaultValue={language} onChange={selectLanguage} className="lang-select editor-options" key="language options">
+                    <select defaultValue={language} onChange={selectLanguage} className="lang-select editor-options" key="language options">
                         {Object.keys(optionList.languages).map(el =>
                             <option key={el}>{el}</option>
                         )}
-                    </select>}
+                    </select>
 
                     <button id="run-btn" onClick={handleCompile}>➤</button>
 
-                    {window.screen.width > 1000 && <label htmlFor="font-size" id='font-size-label'>Font-size:</label>}
-                    {window.screen.width > 1000 && <input type="number" name="font-size" id="editor-font-size-input"
-                        onBlur={handleFontSize} size="" defaultValue={25} min="10" max="50" />}
+                    <label htmlFor="font-size" id='font-size-label'>Font-size:</label>
+                    <input type="number" name="font-size" id="editor-font-size-input"
+                        onBlur={handleFontSize} size="" defaultValue={25} min="10" max="50" />
                     {/* </div> */}
 
 

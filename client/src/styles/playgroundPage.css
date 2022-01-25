@@ -17,7 +17,7 @@
   width: 100%;
   padding: 0px;
   margin: 0px;
-  min-width: 700px;
+  min-width: 560px;
   overflow: scroll;
   box-sizing: border-box;
 }
@@ -283,5 +283,20 @@
     white-space: nowrap;
     width: fit-content;
     padding: 3px 8px;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .editor-options {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 1050px) {
+  #font-size-label {
+    display: none;
+  }
+  #editor-font-size-input {
+    display: none;
   }
 }
