@@ -26,7 +26,7 @@ mongoose.connect(mongoDB_URI, {
 //middleware
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.resolve(__dirname, '../client/build')));
+app.use(express.static(path.resolve(__dirname, './client/build')));
 
 app.get("/api", (req, res) => {
     res.json({ message: "Hello from server!" });
@@ -366,5 +366,5 @@ app.post("/compile-project", (req, responseClient) => {
 });
 
 app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
 });
