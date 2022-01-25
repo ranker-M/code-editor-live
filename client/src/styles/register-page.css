@@ -17,7 +17,7 @@
   box-shadow: 0px 0px 3px #777;
   padding: 25px 50px;
   height: fit-content;
-  width: 400px;
+  width: 420px;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -47,7 +47,7 @@
 }
 
 #register-wrapper #create-account {
-  font-size: 24px;
+  font-size: 30px;
   display: block;
   margin: 0px;
   margin-top: 20px;
@@ -56,9 +56,9 @@
   color: white;
   background-color: #53148a;
   width: 100%;
-  padding: 16px 0px;
+  padding: 10px 0px;
   text-align: center;
-  border-radius: 10px;
+  border-radius: 5px;
   transition: 0.1s;
   cursor: pointer;
 }
