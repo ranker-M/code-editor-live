@@ -17,6 +17,6 @@ Source code: https://github.com/ranker-M/code-editor-live
 it will expire at Jan. 29, 2022, 12:29 a.m. So, compiler function won't work afterwards. But other functions should work as it should be.
 
 Deployed Heroku as an Express server and using static React.js files to create web pages. The basic logic is:<br>
-Build react app --> nominate build file as a static file in server --> send index.html as a respond for all requests other than ones for api
+Build react app --> nominate build file as a static file in server --> send index.html as a respond for all requests other than api requests
 
 In this server, there are plenty of vulnaribilities for malicious attacks so it is not recommended for using these source codes in commercial projects.
