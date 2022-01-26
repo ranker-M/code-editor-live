@@ -3,7 +3,7 @@
 An online code editor and compiler for 8+ different language. Number of language can be increased. 
 
 Source code:https://github.com/ranker-M/code-editor-live
-Live Demo: https://code-editor-live.herokuapp.com
+\nLive Demo: https://code-editor-live.herokuapp.com
 
 **Tech stack:**
 **Front-end:** React.js
