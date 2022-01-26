@@ -119,9 +119,10 @@ const LandingPage = (props) => {
             < footer >
                 <p>
                     Made by <a href="https://www.linkedin.com/in/meriç-gündüz-198a99186/">Meric Gunduz</a>
+                    {" view "}<a href="https://github.com/ranker-M/code-editor-live">&lt;/&gt;</a>
                 </p>
                 <div className="footer-buttons">
-                    <a href="#project-description-wrapper">Home Page</a>
+                    <a href="#landing-navbar">Home Page</a>
                     <Link to="/playground">Playground</Link>
                     <Link to="/register">Sign in</Link>
                 </div>

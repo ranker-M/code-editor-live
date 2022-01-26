@@ -8,7 +8,7 @@ const LandingNavbar = () => {
     };
 
     return (
-        <div className="wrapper">
+        <div className="wrapper" id='landing-navbar'>
             <nav className="navbar">
 
                 <ul className="logo-side">

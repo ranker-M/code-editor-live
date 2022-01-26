@@ -18,6 +18,7 @@ const Playground = (props) => {
     const [theme, setTheme] = useState("dark");
     const [language, setlanguage] = useState(state.language);
     const [code, setCode] = useState(state.code);
+    const [oldCode, setOldCode] = useState(state.code);
     const [projectName, setProjectName] = useState("")
     const params = useParams();
     const [renderState, setRenderState] = useState(false);
@@ -25,6 +26,9 @@ const Playground = (props) => {
     const { setMessageBox } = useMessageBox();
     const [output, setOutput] = useState({ time: "", output: "Output will be displayed here..." });
     const [input, setInput] = useState("");
+    const [warning, setWarning] = useState(false);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         window.scrollTo("0px", "0px");
@@ -84,6 +88,8 @@ const Playground = (props) => {
         axios(options).then(
             res => {
                 setMessageBox(res.data, "lightgreen");
+                setWarning(false);
+                setOldCode(code);
             }).
             catch(err => {
                 console.log(err.response)
@@ -133,6 +139,13 @@ const Playground = (props) => {
             });
     }
 
+    function handleQuit() {
+        if (!warning && document.getElementById("playground-update-button").style.color === "orange") {
+            alert("You didn't save your project. If you leave before saving you will lose your progress.");
+            setWarning(true);
+        } else navigate("/profile");
+    }
+
     return (
         <div id="playgroundPage">
             {currentUser?.loading ? <Loading color="black" /> : <div id="playground-page-wrapper">
@@ -172,7 +185,7 @@ const Playground = (props) => {
 
                     <button onClick={handleUpdate} id="playground-update-button">Save Project</button>
 
-                    <NavLink to="/profile" id="playground-profile-page-button">Profile</NavLink>
+                    <button onClick={handleQuit} id="playground-profile-page-button">Profile</button>
                 </div>
 
 
@@ -190,7 +203,9 @@ const Playground = (props) => {
                                 onChange={(value, viewUpdate) => {
                                     setCode(value);
                                     document.getElementById("playground-update-button").style.color = "orange";
-
+                                    if (oldCode == value) {
+                                        document.getElementById("playground-update-button").style.color = "green";
+                                    }
                                 }}
                             />
                         </div>
