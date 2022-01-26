@@ -2,7 +2,7 @@
 
 An online code editor and compiler for 8+ different language. Number of language can be increased. 
 
-Live Demo: (https://code-editor-live.herokuapp.com)[https://code-editor-live.herokuapp.com]
+Live Demo: https://code-editor-live.herokuapp.com
 
 *Tech stack:*
 *Front-end:* React.js
