@@ -1,4 +1,4 @@
-# code-editor-live
+# Code-editor-live
 
 An online code editor and compiler for 8+ different language. Number of language can be increased. 
 
