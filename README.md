@@ -10,7 +10,7 @@ Source code: https://github.com/ranker-M/code-editor-live
 <br>**Backend:** Node.js, Express.js
 <br>**Authentication:** Firebase
 <br>**Database:** MongoDB
-<br>**Code Editor:** CodeMirror v6
+<br>**Code Editor:** CodeMirror
 <br>**Compiler API:** Sphere Engine Compilers (free trial ends: Jan. 29, 2022, 12:29 a.m.)
 <br>**Deployed:** Heroku
 
