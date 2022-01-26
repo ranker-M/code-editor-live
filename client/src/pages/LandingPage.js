@@ -14,7 +14,6 @@ const LandingPage = (props) => {
         for (var i = 0; i < anchors.length; i++) {
             anchors[i].onclick = function () { return false; };
         }
-        document.querySelector("div.wrapper").style.display = "none";
     };
 
     return (

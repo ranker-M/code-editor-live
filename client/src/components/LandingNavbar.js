@@ -2,6 +2,11 @@ import { NavLink } from 'react-router-dom';
 import '../styles/landingNavbar.css'
 
 const LandingNavbar = () => {
+
+    window.onload = function () {
+        document.querySelector("navbar ul.buttons").style.display = "none";
+    };
+
     return (
         <div className="wrapper">
             <nav className="navbar">
