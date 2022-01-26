@@ -2,16 +2,16 @@
 
 An online code editor and compiler for 8+ different language. Number of language can be increased. 
 
-Source code:https://github.com/ranker-M/code-editor-live
+Source code: https://github.com/ranker-M/code-editor-live
 <br>Live Demo: https://code-editor-live.herokuapp.com
 
 **Tech stack:**
-**Front-end:** React.js
-**Backend:** Node.js, Express.js
-**Authentication:** Firebase
-**Database:** MongoDB
-**Compiler API:** Sphere Engine Compilers (free trial ends: Jan. 29, 2022, 12:29 a.m.)
-**Deployed:** Heroku
+<br>**Front-end:** React.js
+<br>**Backend:** Node.js, Express.js
+<br>**Authentication:** Firebase
+<br>**Database:** MongoDB
+<br>**Compiler API:** Sphere Engine Compilers (free trial ends: Jan. 29, 2022, 12:29 a.m.)
+<br>**Deployed:** Heroku
 
 **Note:** I used Sphere Engine Compiler API to compile codes and I am using free-trial version of it. If I don't renew it, 
 it will expire at Jan. 29, 2022, 12:29 a.m. So, compiler function won't work afterwards. But other functions should work as it should be.
