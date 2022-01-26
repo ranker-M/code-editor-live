@@ -8,7 +8,7 @@ import axios from 'axios';
 const LoginPage = () => {
     const [email, setEmail] = useState('')
     const [password, setPasword] = useState('')
-    const { login, signInWithGoogle } = useAuth();
+    const { login, signInWithGoogle, sendEmailForVerification } = useAuth();
     const errBox = document.getElementById("error-box");
     const navigate = useNavigate();
     const button = document.getElementById("create-account");
@@ -22,6 +22,17 @@ const LoginPage = () => {
             .then((res) => {
                 errBox.style.display = "none";
                 errBox.innerHTML = "";
+                console.log(res);
+                console.log("verified", res.user.emailVerified);
+                if (!res.user.emailVerified) {
+                    sendEmailForVerification(res.user).then((result) => {
+                        setMessageBox("A verification mail sent to your email. Please verify your account.");
+                        console.log(result);
+                    }).catch(err => {
+                        console.log(err);
+                    });
+                    // navigate("/verify-email");
+                }
                 // console.log("login:", state);
                 // navigate(state?.path || "/profile");
             })

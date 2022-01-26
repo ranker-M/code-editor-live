@@ -3,7 +3,7 @@ import Playground from './pages/Playground';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import NotFoundPage from './pages/NotFoundPage';
-import { BrowserRouter, Route, Routes, Navigate, useLocation } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate, useLocation, useSearchParams } from 'react-router-dom';
 import AuthContextProvider, { useAuth } from './contexts/AuthContext';
 import MessageBoxContextProvider from './contexts/MessageBox';
 import ProfilePage from './pages/ProfilePage';
@@ -13,6 +13,7 @@ import MessageWindow from './components/MessageWindow';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import ProxyPlayground from './pages/ProxyPlayground';
+import VerifyEmail from './pages/VerifyEmail';
 
 function App() {
 
@@ -28,6 +29,9 @@ function App() {
 					{isMobile() ? <LandingPage mobile={true} /> : <div className="App">
 						<MessageWindow />
 						<Routes>
+							<Route exact path="/action" element={
+								<ActionPages />
+							} />
 							<Route exact path="/" element={
 								<RequireAuth>
 									<LandingPage />
@@ -48,9 +52,7 @@ function App() {
 									<RegisterPage />
 								</RequireAuth>} />
 							<Route exact path="/login" element={
-								<RequireAuth>
-									<LoginPage />
-								</RequireAuth>
+								<LoginPage />
 							} />
 							<Route exact path="/forgot-password" element={
 								<RequireAuth>
@@ -60,6 +62,9 @@ function App() {
 								<RequireAuth>
 									<ResetPasswordPage />
 								</RequireAuth>} />
+							<Route exact path="/verify-email" element={
+								<VerifyEmail />
+							} />
 							<Route exact path="/profile" element={
 								<RequireAuth>
 									<ProfilePage />
@@ -79,8 +84,7 @@ function RequireAuth({ children }) {
 	const { currentUser } = useAuth();
 	const location = useLocation();
 	const { state } = useLocation();
-
-	if (location.pathname == "/register" || location.pathname == "/login"
+	if (location.pathname == "/register"
 		|| location.pathname == "/forgot-password" || location.pathname == "/reset-password"
 		|| location.pathname == "/" || location.pathname === "/playground"
 	) {
@@ -92,5 +96,16 @@ function RequireAuth({ children }) {
 				state={{ path: location.pathname }}
 			/>
 	}
+}
+
+function ActionPages() {
+	const [searchParams, setSearchParams] = useSearchParams();
+
+	console.log(searchParams);
+	let mode = searchParams.get("mode");
+	let oobCode = searchParams.get("oobCode");
+	if (mode == "verifyEmail") return <Navigate to="/verify-email" state={{ oobCode: oobCode }} />
+	if (mode === "resetPassword") return <Navigate to="/forgot-password" />;
+	return <Navigate to="/login" />;
 }
 export default App;
