@@ -19,4 +19,4 @@ it will expire at Jan. 29, 2022, 12:29 a.m. So, compiler function won't work aft
 Deployed Heroku as an Express server and using static React.js files to create web pages. The basic logic is:<br>
 Build react app --> nominate build file as a static file in server --> send index.html as a respond for all requests other than api requests
 
-In this server, there are plenty of vulnaribilities for malicious attacks so it is not recommended for using these source codes in commercial projects.
+In this project, there are plenty of vulnaribilities for malicious attacks so it is not recommended for using these source codes in commercial projects.
