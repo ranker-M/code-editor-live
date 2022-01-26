@@ -4,7 +4,7 @@ import '../styles/landingNavbar.css'
 const LandingNavbar = () => {
 
     window.onload = function () {
-        document.querySelector("navbar ul.buttons").style.display = "none";
+        document.querySelector(".navbar ul.buttons").style.display = "none";
     };
 
     return (
