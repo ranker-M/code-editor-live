@@ -11,32 +11,23 @@ const LoginPage = () => {
     const { login, signInWithGoogle, sendEmailForVerification } = useAuth();
     const errBox = document.getElementById("error-box");
     const navigate = useNavigate();
-    const button = document.getElementById("create-account");
+    const buttons = document.querySelectorAll("#register-wrapper button");
     const { state } = useLocation();
     const { setMessageBox } = useMessageBox();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        button.disabled = true;
+        buttons.forEach(el => el.disabled = true);
         login(email, password)
             .then((res) => {
                 errBox.style.display = "none";
                 errBox.innerHTML = "";
-                console.log(res);
-                console.log("verified", res.user.emailVerified);
-                if (!res.user.emailVerified) {
-                    sendEmailForVerification(res.user).then((result) => {
-                        setMessageBox("A verification mail sent to your email. Please verify your account.");
-                        console.log(result);
-                    }).catch(err => {
-                        console.log(err);
-                    });
-                    // navigate("/verify-email");
-                }
+                handleEmailVerification(res);
                 // console.log("login:", state);
                 // navigate(state?.path || "/profile");
             })
             .catch((err) => {
+                errBox.style.backgroundColor = "red";
                 console.log(err.message);
                 if (err.message.indexOf("wrong-password") != -1) {
                     errBox.innerHTML = "Wrong password";
@@ -44,8 +35,32 @@ const LoginPage = () => {
                     errBox.innerHTML = "User not found";
                 } else errBox.innerHTML = err.message;
                 errBox.style.display = "block";
-                button.disabled = false;
+                buttons.forEach(el => el.disabled = false);
             })
+    }
+
+    function handleEmailVerification(res) {
+        console.log(res);
+        console.log("verified", res.user.emailVerified);
+        if (!res.user.emailVerified) {
+            sendEmailForVerification(res.user).then((result) => {
+                setMessageBox("Please verify your email", "red");
+                console.log(result);
+                errBox.style.backgroundColor = "darkviolet";
+                errBox.innerHTML = "Email not verified. A verification mail sent to your email. Please check your email.";
+                errBox.style.display = "block";
+            }).catch(err => {
+                console.log(err);
+                errBox.style.backgroundColor = "red";
+                errBox.innerHTML = err.message;
+                errBox.style.display = "block";
+                buttons.forEach(el => el.disabled = false);
+            });
+
+        } else {
+            setMessageBox("Login successful", "lightgreen");
+            navigate("/profile");
+        }
     }
 
     function handleGoogleSignIn() {
@@ -56,7 +71,7 @@ const LoginPage = () => {
                     axios.get("/add-user/" + user.user.email).then(
                         res => {
                             setMessageBox("User successfully created", "lightgreen");
-                            navigate(state?.path || "/profile");
+                            handleEmailVerification(user);
                         }).
                         catch(err => {
                             // console.log(err.response.data);
@@ -64,7 +79,8 @@ const LoginPage = () => {
                                 setMessageBox("Login successful", "lightgreen");
                             } else setMessageBox(err.response.data, "red");
                         });
-                } else setMessageBox("Login successful", "lightgreen");
+                } else handleEmailVerification(user);
+
             })
             .catch(err => {
                 // console.log(err);

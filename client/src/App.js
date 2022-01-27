@@ -89,15 +89,16 @@ function RequireAuth({ children }) {
 		|| location.pathname == "/" || location.pathname === "/playground"
 	) {
 		if (currentUser?.loading) return <Loading color="black" />
-		else return currentUser ? <Navigate to="/profile" state={{ path: state?.path }} /> : children;
+		else {
+			if (!currentUser) return children;
+			else if (!currentUser.isEmailVerified) return <Navigate to="/login" />
+			else return <Navigate to="/profile" state={{ path: state?.path }} />;
+		}
 	} else {
-		return currentUser ? children
-			: <Navigate to="/login"
-				state={{ path: location.pathname }}
-			/>
+		if (!currentUser || !currentUser.isEmailVerified) return <Navigate to="/login" state={{ path: location.pathname }} />
+		else return children;
 	}
 }
-
 function ActionPages() {
 	const [searchParams, setSearchParams] = useSearchParams();
 

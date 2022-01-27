@@ -10,9 +10,9 @@ const RegisterPage = () => {
     const [email, setEmail] = useState('')
     const [password, setPasword] = useState('')
     const [password2, setPasword2] = useState('')
-    const { register, signInWithGoogle } = useAuth();
+    const { register, signInWithGoogle, sendEmailForVerification } = useAuth();
     const errBox = document.getElementById("error-box");
-    const button = document.getElementById("create-account");
+    const buttons = document.querySelectorAll("#register-wrapper button");
     const { setMessageBox } = useMessageBox();
     const navigate = useNavigate();
     const { state } = useLocation();
@@ -20,11 +20,11 @@ const RegisterPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        button.disabled = true;
+        buttons.forEach(el => el.disabled = true);
         if (password !== password2) {
             errBox.innerHTML = "Passwords different";
             errBox.style.display = "block";
-            button.disabled = false;
+            buttons.forEach(el => el.disabled = false);
             return;
         }
         register(email, password)
@@ -34,7 +34,7 @@ const RegisterPage = () => {
                 errBox.innerHTML = "";
 
                 // add new user to db
-                registerUserToDb(res.user.email);
+                registerUserToDb(res);
             })
             .catch((err) => {
                 if (err.message.indexOf("already") != -1) {
@@ -43,22 +43,45 @@ const RegisterPage = () => {
                     errBox.innerHTML = "Password should be at least 6 characters";
                 }
                 errBox.style.display = "block";
-                button.disabled = false;
+                buttons.forEach(el => el.disabled = false);
             })
     }
 
-    function registerUserToDb(email) {
-        axios.get("/add-user/" + email).then(
+    function registerUserToDb(res) {
+        axios.get("/add-user/" + res.user.email).then(
             res => {
                 setMessageBox("User successfully created", "lightgreen");
-                navigate(state?.path || "/profile");
+                handleEmailVerification(res);
             }).
             catch(err => {
                 // console.log(err.response.data);
                 if (err.response.data.indexOf("duplicate key error") != -1) {
-                    setMessageBox("Login successful", "lightgreen");
+                    handleEmailVerification(res);
                 } else setMessageBox(err.response.data, "red");
             });
+    }
+
+    function handleEmailVerification(res) {
+        console.log(res);
+        console.log("verified", res.user.emailVerified);
+        if (!res.user.emailVerified) {
+            sendEmailForVerification(res.user).then((result) => {
+                setMessageBox("Please verify your email", "red");
+                errBox.style.backgroundColor = "darkviolet";
+                errBox.innerHTML = "Email not verified. A verification mail sent to your email. Please check your email.";
+                errBox.style.display = "block";
+            }).catch(err => {
+                console.log(err);
+                errBox.style.backgroundColor = "red";
+                errBox.innerHTML = err.message;
+                errBox.style.display = "block";
+                buttons.forEach(el => el.disabled = false);
+            });
+
+        } else {
+            setMessageBox("Login successful", "lightgreen");
+            navigate("/profile");
+        }
     }
 
     return (
