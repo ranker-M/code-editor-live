@@ -32,7 +32,7 @@ const LoginPage = () => {
                 if (err.message.indexOf("wrong-password") != -1) {
                     errBox.innerHTML = "Wrong password";
                 } else if (err.message.indexOf("user-not-found") != -1) {
-                    errBox.innerHTML = "User not found";
+                    errBox.innerHTML = "There isn't any user related to this email";
                 } else errBox.innerHTML = err.message;
                 errBox.style.display = "block";
                 buttons.forEach(el => el.disabled = false);
@@ -44,15 +44,16 @@ const LoginPage = () => {
         console.log("verified", res.user.emailVerified);
         if (!res.user.emailVerified) {
             sendEmailForVerification(res.user).then((result) => {
-                setMessageBox("Please verify your email", "red");
+                setMessageBox("Please verify your email", "orangered");
                 console.log(result);
                 errBox.style.backgroundColor = "darkviolet";
                 errBox.innerHTML = "Email not verified. A verification mail sent to your email. Please check your email.";
                 errBox.style.display = "block";
             }).catch(err => {
-                console.log(err);
+                if (err.message.indexOf("too-many-requests") !== -1) {
+                    errBox.innerHTML = "Verify your account to login. A verification mail already sent to your email address."
+                } else errBox.innerHTML = err.message;
                 errBox.style.backgroundColor = "red";
-                errBox.innerHTML = err.message;
                 errBox.style.display = "block";
                 buttons.forEach(el => el.disabled = false);
             });

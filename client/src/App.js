@@ -16,7 +16,6 @@ import ProxyPlayground from './pages/ProxyPlayground';
 import VerifyEmail from './pages/VerifyEmail';
 
 function App() {
-
 	function isMobile() {
 		return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 	}
@@ -52,7 +51,9 @@ function App() {
 									<RegisterPage />
 								</RequireAuth>} />
 							<Route exact path="/login" element={
-								<LoginPage />
+								<RequireAuth>
+									<LoginPage />
+								</RequireAuth>
 							} />
 							<Route exact path="/forgot-password" element={
 								<RequireAuth>
@@ -63,7 +64,9 @@ function App() {
 									<ResetPasswordPage />
 								</RequireAuth>} />
 							<Route exact path="/verify-email" element={
-								<VerifyEmail />
+								<RequireAuth>
+									<VerifyEmail />
+								</RequireAuth>
 							} />
 							<Route exact path="/profile" element={
 								<RequireAuth>
@@ -81,24 +84,25 @@ function App() {
 
 
 function RequireAuth({ children }) {
-	const { currentUser } = useAuth();
-	const location = useLocation();
 	const { state } = useLocation();
-	if (location.pathname == "/register"
+	const location = useLocation();
+	const { currentUser } = useAuth();
+
+	if (location.pathname == "/register" || location.pathname == "/login" || location.pathname == "/verify-email"
 		|| location.pathname == "/forgot-password" || location.pathname == "/reset-password"
 		|| location.pathname == "/" || location.pathname === "/playground"
 	) {
 		if (currentUser?.loading) return <Loading color="black" />
 		else {
-			if (!currentUser) return children;
-			else if (!currentUser.isEmailVerified) return <Navigate to="/login" />
+			if (!currentUser || !currentUser.emailVerified) return children;
 			else return <Navigate to="/profile" state={{ path: state?.path }} />;
 		}
 	} else {
-		if (!currentUser || !currentUser.isEmailVerified) return <Navigate to="/login" state={{ path: location.pathname }} />
+		if (!currentUser || !currentUser.emailVerified) return <Navigate to="/login" state={{ path: location.pathname }} />
 		else return children;
 	}
 }
+
 function ActionPages() {
 	const [searchParams, setSearchParams] = useSearchParams();
 
@@ -106,7 +110,7 @@ function ActionPages() {
 	let mode = searchParams.get("mode");
 	let oobCode = searchParams.get("oobCode");
 	if (mode == "verifyEmail") return <Navigate to="/verify-email" state={{ oobCode: oobCode }} />
-	if (mode === "resetPassword") return <Navigate to="/forgot-password" />;
+	if (mode === "resetPassword") return <Navigate to="/reset-password" state={{ oobCode: oobCode }} />;
 	return <Navigate to="/login" />;
 }
 export default App;

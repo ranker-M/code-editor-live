@@ -47,26 +47,26 @@ const RegisterPage = () => {
             })
     }
 
-    function registerUserToDb(res) {
-        axios.get("/add-user/" + res.user.email).then(
+    function registerUserToDb(userObj) {
+        axios.get("/add-user/" + userObj.user.email).then(
             res => {
                 setMessageBox("User successfully created", "lightgreen");
-                handleEmailVerification(res);
+                handleEmailVerification(userObj);
             }).
             catch(err => {
                 // console.log(err.response.data);
                 if (err.response.data.indexOf("duplicate key error") != -1) {
-                    handleEmailVerification(res);
+                    handleEmailVerification(userObj);
                 } else setMessageBox(err.response.data, "red");
             });
     }
 
     function handleEmailVerification(res) {
-        console.log(res);
+        console.log(res.user);
         console.log("verified", res.user.emailVerified);
         if (!res.user.emailVerified) {
             sendEmailForVerification(res.user).then((result) => {
-                setMessageBox("Please verify your email", "red");
+                setMessageBox("Please verify your email", "orangered");
                 errBox.style.backgroundColor = "darkviolet";
                 errBox.innerHTML = "Email not verified. A verification mail sent to your email. Please check your email.";
                 errBox.style.display = "block";
@@ -80,7 +80,7 @@ const RegisterPage = () => {
 
         } else {
             setMessageBox("Login successful", "lightgreen");
-            navigate("/profile");
+            navigate("/profile", { replace: true });
         }
     }
 

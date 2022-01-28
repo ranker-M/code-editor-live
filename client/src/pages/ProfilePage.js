@@ -109,10 +109,6 @@ const ProfilePage = () => {
                     />
                 </div>
                 <main id="profile-main">
-                    {/* {currentUser?.loading ? <Loading color="black" /> :
-                        <p style={{ "wordBreak": "break-word" }}>
-                            {JSON.stringify(currentUser, null, 2)}
-                        </p>} */}
                     <AllProjects searchValue={searchValue} />
                 </main>
             </section>

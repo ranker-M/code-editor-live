@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import '../styles/register-page.css';
 import { useMessageBox } from "../contexts/MessageBox";
@@ -9,24 +9,22 @@ const ResetPasswordPage = () => {
     const [password, setPassword] = useState('')
     const [password2, setPassword2] = useState('')
     const { resetPassword } = useAuth();
+    const { state } = useLocation();
     const errBox = document.getElementById("error-box");
     const button = document.getElementById("create-account");
-    const [searchParams, setSearchParams] = useSearchParams();
+    const oobCode = state?.oobCode;
     const { setMessageBox } = useMessageBox();
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Navigate to forgot password page if queries missing
-        if (searchParams.get("oobCode") == null ||
-            searchParams.get("apiKey") == null || searchParams.get("mode") != "resetPassword") {
+        // Navigate to forgot password page if operation code missing
+        if (!oobCode) {
             navigate("/forgot-password");
         }
-    }, []);
+    }, [oobCode]);
 
     const handleResetPassword = (e) => {
         e.preventDefault();
-        const oobCode = searchParams.get("oobCode");
-        const continueUrl = searchParams.get("continueUrl");
 
         button.disabled = true;
         if (password != password2) {

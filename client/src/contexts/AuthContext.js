@@ -33,7 +33,6 @@ export const useAuth = () => useContext(AuthContext)
 export default function AuthContextProvider({ children }) {
     const [currentUser, setCurrentUser] = useState({ loading: true });
 
-
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, user => {
             if (user) setCurrentUser(user);
