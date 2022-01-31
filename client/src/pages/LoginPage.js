@@ -4,11 +4,17 @@ import { useAuth } from "../contexts/AuthContext";
 import { useMessageBox } from "../contexts/MessageBox";
 import '../styles/register-page.css'
 import axios from 'axios';
+import { Octokit } from "@octokit/core";
+
+import {
+    GithubAuthProvider,
+} from "firebase/auth"
+
 
 const LoginPage = () => {
     const [email, setEmail] = useState('')
     const [password, setPasword] = useState('')
-    const { login, signInWithGoogle, sendEmailForVerification } = useAuth();
+    const { login, signInWithGoogle, sendEmailForVerification, signInWithGithub, linkAccounts } = useAuth();
     const errBox = document.getElementById("error-box");
     const navigate = useNavigate();
     const buttons = document.querySelectorAll("#register-wrapper button");
@@ -23,8 +29,6 @@ const LoginPage = () => {
                 errBox.style.display = "none";
                 errBox.innerHTML = "";
                 handleEmailVerification(res);
-                // console.log("login:", state);
-                // navigate(state?.path || "/profile");
             })
             .catch((err) => {
                 errBox.style.backgroundColor = "red";
@@ -65,29 +69,108 @@ const LoginPage = () => {
     }
 
     function handleGoogleSignIn() {
-        signInWithGoogle()
-            .then(user => {
-                // console.log(user);
-                if (user._tokenResponse?.isNewUser) {
-                    axios.get("/add-user/" + user.user.email).then(
-                        res => {
-                            setMessageBox("User successfully created", "lightgreen");
-                            handleEmailVerification(user);
-                        }).
-                        catch(err => {
-                            // console.log(err.response.data);
-                            if (err.response.data.indexOf("duplicate key error") != -1) {
-                                setMessageBox("Login successful", "lightgreen");
-                            } else setMessageBox(err.response.data, "red");
-                        });
-                } else handleEmailVerification(user);
+        signInWithGoogle().then(user => {
+            if (user._tokenResponse?.isNewUser) {
+                console.log("email user:", user.user.email);
+                const authCredential = EmailAuthProvider.credential(user.user.email, ((Math.random() + 1) * 6000).toString());
+                console.log(authCredential);
+                linkWithCredential(user.user, authCredential)
+                    .then((usercred) => {
+                        var user = usercred.user;
+                        console.log("Account linking success", user);
+                    }).catch((error) => {
+                        console.log("Account linking error", error);
+                    });
+                addUserToDatabase(user);
+            }
+            handleEmailVerification(user);
+        }).catch(err => {
+            // console.log(err);
+            setMessageBox(err.message, "red");
+            throw err;
+        });
+    }
 
-            })
-            .catch(err => {
-                // console.log(err);
-                setMessageBox(err.message, "red");
+    function hadnleGithubSignIn() {
+        signInWithGithub().then(user => {
+            console.log(user);
+            if (user._tokenResponse?.isNewUser) {
+                console.log("email user:", user.user.email);
+                const authCredential = EmailAuthProvider.credential(user.user.email, ((Math.random() + 1) * 6000).toString());
+                console.log(authCredential);
+                linkWithCredential(user.user, authCredential)
+                    .then((usercred) => {
+                        var user = usercred.user;
+                        console.log("Account linking success", user);
+                    }).catch((error) => {
+                        console.log("Account linking error", error);
+                    });
+                addUserToDatabase(user);
+            }
+            handleEmailVerification(user);
+        }).catch(err => {
+            setMessageBox(err.message, "red");
+            linkGithubToGoogle(err);
+        })
+    }
+
+
+    function linkGithubToGoogle(err) {
+        console.log(err);
+        const authCredential = GithubAuthProvider.credentialFromError(err);
+        // console.log("cred:", credential);
+        const octokit = new Octokit({ auth: authCredential.accessToken });
+        octokit.request("GET /user/emails", {
+            org: "octokit",
+            type: "private"
+        }).then(res => {
+            const email = res.data.filter(el => el.primary)[0].email;
+            console.log(email);
+            fetchSignInMethodsForEmail(auth, email)
+                .then(res => {
+                    console.log("prov:", res);
+                    if (res.includes("google.com")) {
+                        const googleProvider = new GoogleAuthProvider();
+                        console.log(email);
+                        googleProvider.setCustomParameters({ login_hint: email });
+                        signInWithPopup(auth, googleProvider).then(google => {
+                            console.log("google", google);
+                            linkWithCredential(google.user, authCredential)
+                                .then((usercred) => {
+                                    var user = usercred.user;
+                                    console.log("Account linking success", user);
+                                }).catch((error) => {
+                                    console.log("Account linking error", error);
+                                });
+                        }).catch(err => {
+                            console.log(err);
+                        })
+                    } else {
+
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
+    function addUserToDatabase(user) {
+        axios.get("/add-user/" + user.user.email).then(
+            res => {
+                setMessageBox("User successfully created", "lightgreen");
+            }).
+            catch(err => {
+                // console.log(err.response.data);
+                if (err.response.data.indexOf("duplicate key error") != -1) {
+                    setMessageBox("Login successful", "lightgreen");
+                } else
+                    setMessageBox(err.response.data, "red");
             });
     }
+
 
     return (
         <div id="register-main">
@@ -116,6 +199,9 @@ const LoginPage = () => {
                     <button
                         onClick={handleGoogleSignIn}
                         id="google-register-btn">Sign in with Google</button>
+                    <button
+                        onClick={hadnleGithubSignIn}
+                        id="google-register-btn">Sign in with Github</button>
                 </form>
             </div >
         </div>

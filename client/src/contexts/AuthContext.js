@@ -2,6 +2,7 @@ import {
     createContext, useContext,
     useEffect, useState
 } from "react";
+import { Octokit } from "@octokit/core";
 import { auth } from '../utils/init-firebase'
 import {
     createUserWithEmailAndPassword,
@@ -9,30 +10,39 @@ import {
     onAuthStateChanged,
     signOut,
     GoogleAuthProvider,
+    GithubAuthProvider,
     signInWithPopup,
     sendPasswordResetEmail,
     confirmPasswordReset,
     sendEmailVerification,
-    applyActionCode
+    applyActionCode,
+    fetchSignInMethodsForEmail,
+    signInWithRedirect,
+    getRedirectResult,
+    linkWithCredential, EmailAuthProvider, getUserByEmail, getAuth, deleteUser
 } from "firebase/auth"
+import { useMessageBox } from "./MessageBox";
+import axios from 'axios';
 
 const AuthContext = createContext({
     currentUser: null,
     register: () => Promise,
     login: () => Promise,
     logout: () => Promise,
-    signInWithGoogle: () => Promise,
+    signInWithGoogle: () => Function,
+    signInWithGithub: () => Function,
     forgotPassword: () => Promise,
     resetPassword: () => Promise,
     sendEmailForVerification: () => Promise,
-    confirmEmailVerification: () => Promise
+    confirmEmailVerification: () => Promise,
 })
+
 
 export const useAuth = () => useContext(AuthContext)
 
 export default function AuthContextProvider({ children }) {
     const [currentUser, setCurrentUser] = useState({ loading: true });
-
+    const { setMessageBox } = useMessageBox();
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, user => {
             if (user) setCurrentUser(user);
@@ -57,13 +67,18 @@ export default function AuthContextProvider({ children }) {
         return signOut(auth);
     }
 
-    function signInWithGoogle() {
+    async function signInWithGoogle() {
         const provider = new GoogleAuthProvider();
         return signInWithPopup(auth, provider);
     }
 
+    function signInWithGithub() {
+        const provider = new GithubAuthProvider();
+        return signInWithPopup(auth, provider);
+    }
+
     function forgotPassword(email) {
-        return sendPasswordResetEmail(auth, email, { url: "http://localhost:3000/login" });
+        return sendPasswordResetEmail(auth, email);
     }
 
     function resetPassword(oobCode, newPassword) {
@@ -84,10 +99,12 @@ export default function AuthContextProvider({ children }) {
         login,
         logout,
         signInWithGoogle,
+        signInWithGithub,
         forgotPassword,
         resetPassword,
         sendEmailForVerification,
-        confirmEmailVerification
+        confirmEmailVerification,
+
     }
 
     return <AuthContext.Provider value={value}>
