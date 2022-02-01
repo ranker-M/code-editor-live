@@ -1,10 +1,12 @@
 import { NavLink } from 'react-router-dom';
 import '../styles/landingNavbar.css'
 
-const LandingNavbar = () => {
+const LandingNavbar = (props) => {
 
     window.onload = function () {
-        document.querySelector(".navbar ul.buttons").style.display = "none";
+        if (props.mobile) {
+            document.querySelector(".navbar ul.buttons").style.display = "none";
+        }
     };
 
     return (

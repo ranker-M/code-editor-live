@@ -10,15 +10,17 @@ import { useEffect } from "react";
 const LandingPage = (props) => {
 
     window.onload = function () {
-        var anchors = document.getElementsByTagName("a");
-        for (var i = 0; i < anchors.length; i++) {
-            anchors[i].onclick = function () { return false; };
+        if (props.mobile) {
+            var anchors = document.getElementsByTagName("a");
+            for (var i = 0; i < anchors.length; i++) {
+                anchors[i].onclick = function () { return false; };
+            }
         }
     };
 
     return (
         <div className="landingPage">
-            <LandingNavbar />
+            <LandingNavbar mobile={props.mobile} />
             {/* Background Image */}
             <div className="landing-page-bg">
                 {props.mobile ?
