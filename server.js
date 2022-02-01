@@ -187,6 +187,7 @@ app.put("/update-projectName/:username/:projectId", (req, res) => {
 
 // compiler 
 var request = require('request');
+const res = require('express/lib/response');
 
 // define access parameters
 var accessToken = process.env.SPHERE_ENGINE_ACCESS_TOKEN;
@@ -244,7 +245,6 @@ const compilers = {
 app.post("/compile-project", (req, responseClient) => {
     console.log("Compile project(plain) request for:", req.body);
     let project = req.body.project;
-    // console.log("Result:", project, "compiler:", compilers[project.language])
     //Compile request(submission) so sphere engine
     // define request parameters
     var submissionData = {
@@ -262,7 +262,8 @@ app.post("/compile-project", (req, responseClient) => {
 
         if (error) {
             console.log('Connection problem');
-            throw ('Connection problem');
+            // throw ('Connection problem');
+            responseClient.status(404).send("Compiler Error: Connection problem");
         }
 
         // process response
@@ -285,7 +286,8 @@ app.post("/compile-project", (req, responseClient) => {
 
                         if (error) {
                             console.log('Connection problem');
-                            throw ('Connection problem');
+                            // throw ('Connection problem');
+                            responseClient.status(404).send("Compiler Error: Connection problem");
                         }
 
                         // process response
@@ -294,9 +296,6 @@ app.post("/compile-project", (req, responseClient) => {
                                 let submission = JSON.parse(response.body);
                                 // if (submission.executing) console.log("Submission status:", submission); // submission data in JSON
                                 if (!submission.executing) {
-                                    // console.log("Compiler result:", submission);
-                                    // console.log("source:", submission.result.streams.source)
-                                    // console.log("output:", submission.result.streams.output)
                                     clearInterval(interval);
                                     interval = null;
                                     console.log("Time:", submission.result.time);
@@ -331,16 +330,19 @@ app.post("/compile-project", (req, responseClient) => {
                                 }
                             } else {
                                 if (response.statusCode === 401) {
-                                    console.log('Invalid access token');
-                                    throw ('Invalid access token');
+                                    console.log('Compiler Error: Invalid access token');
+                                    // throw ('Invalid access token');
+                                    responseClient.status(404).send("Compiler Error: Invalid access token");
                                 }
                                 if (response.statusCode === 403) {
                                     console.log('Access denied');
-                                    throw ('Access denied');
+                                    responseClient.status(404).send("Compiler Error: Access denied");
+                                    // throw ('Access denied');
                                 }
                                 if (response.statusCode === 404) {
                                     console.log('Submision not found');
-                                    throw ('Submision not found');
+                                    // throw ('Submision not found');
+                                    responseClient.status(404).send("Compiler Error: Submision not found");
                                 }
                             }
                         }
@@ -350,14 +352,17 @@ app.post("/compile-project", (req, responseClient) => {
             } else {
                 if (response.statusCode === 401) {
                     console.log('Invalid access token');
-                    throw ('Invalid access token');
+                    // throw ('Invalid access token');
+                    responseClient.status(404).send("Compiler Error: Invalid access token")
                 } else if (response.statusCode === 402) {
                     console.log('Unable to create submission');
-                    throw ('Unable to create submission');
+                    responseClient.status(404).send("Compiler Error: Unable to create submission")
+                    // throw ('Unable to create submission');
                 } else if (response.statusCode === 400) {
                     var body = JSON.parse(response.body);
                     console.log('Error code: ' + body.error_code + ', details available in the message: ' + body.message)
-                    throw ('Error code: ' + body.error_code + ', details available in the message: ' + body.message)
+                    responseClient.status(404).send("Compiler Error: " + 'Error code: ' + body.error_code + ', details available in the message: ' + body.message);
+                    // throw ('Error code: ' + body.error_code + ', details available in the message: ' + body.message)
                 }
             }
         }

@@ -88,8 +88,6 @@ function RequireAuth({ children }) {
 	const location = useLocation();
 	const { currentUser } = useAuth();
 
-	console.log(currentUser);
-
 	if (location.pathname == "/register" || location.pathname == "/login" || location.pathname == "/verify-email"
 		|| location.pathname == "/forgot-password" || location.pathname == "/reset-password"
 		|| location.pathname == "/" || location.pathname === "/playground"

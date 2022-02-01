@@ -4,12 +4,6 @@ import { useAuth } from "../contexts/AuthContext";
 import { useMessageBox } from "../contexts/MessageBox";
 import '../styles/register-page.css'
 import axios from 'axios';
-import { Octokit } from "@octokit/core";
-
-import {
-    GithubAuthProvider,
-} from "firebase/auth"
-
 
 const LoginPage = () => {
     const [email, setEmail] = useState('')
@@ -44,8 +38,7 @@ const LoginPage = () => {
     }
 
     function handleEmailVerification(res) {
-        console.log(res);
-        console.log("verified", res.user.emailVerified);
+        const errBox = document.getElementById("error-box");
         if (!res.user.emailVerified) {
             sendEmailForVerification(res.user).then((result) => {
                 setMessageBox("Please verify your email", "orangered");
@@ -71,91 +64,34 @@ const LoginPage = () => {
     function handleGoogleSignIn() {
         signInWithGoogle().then(user => {
             if (user._tokenResponse?.isNewUser) {
-                console.log("email user:", user.user.email);
-                const authCredential = EmailAuthProvider.credential(user.user.email, ((Math.random() + 1) * 6000).toString());
-                console.log(authCredential);
-                linkWithCredential(user.user, authCredential)
-                    .then((usercred) => {
-                        var user = usercred.user;
-                        console.log("Account linking success", user);
-                    }).catch((error) => {
-                        console.log("Account linking error", error);
-                    });
                 addUserToDatabase(user);
             }
             handleEmailVerification(user);
         }).catch(err => {
-            // console.log(err);
             setMessageBox(err.message, "red");
-            throw err;
         });
     }
 
-    function hadnleGithubSignIn() {
+    function handleGithubSignIn() {
         signInWithGithub().then(user => {
             console.log(user);
             if (user._tokenResponse?.isNewUser) {
-                console.log("email user:", user.user.email);
-                const authCredential = EmailAuthProvider.credential(user.user.email, ((Math.random() + 1) * 6000).toString());
-                console.log(authCredential);
-                linkWithCredential(user.user, authCredential)
-                    .then((usercred) => {
-                        var user = usercred.user;
-                        console.log("Account linking success", user);
-                    }).catch((error) => {
-                        console.log("Account linking error", error);
-                    });
                 addUserToDatabase(user);
             }
             handleEmailVerification(user);
         }).catch(err => {
-            setMessageBox(err.message, "red");
-            linkGithubToGoogle(err);
+            setMessageBox(`Account linking needed`, "red");
+            if (err.message.indexOf('auth/account-exists-with-different-credential') != -1) {
+                const errBox = document.getElementById("error-box");
+                errBox.innerHTML = "This email is already being used. Please enter your account with other providers. We will link your account so you can use this method from now on.";
+                errBox.style.backgroundColor = "red";
+                errBox.style.display = "block";
+                buttons.forEach(el => el.disabled = false);
+                linkAccounts(err);
+            }
         })
     }
 
-
-    function linkGithubToGoogle(err) {
-        console.log(err);
-        const authCredential = GithubAuthProvider.credentialFromError(err);
-        // console.log("cred:", credential);
-        const octokit = new Octokit({ auth: authCredential.accessToken });
-        octokit.request("GET /user/emails", {
-            org: "octokit",
-            type: "private"
-        }).then(res => {
-            const email = res.data.filter(el => el.primary)[0].email;
-            console.log(email);
-            fetchSignInMethodsForEmail(auth, email)
-                .then(res => {
-                    console.log("prov:", res);
-                    if (res.includes("google.com")) {
-                        const googleProvider = new GoogleAuthProvider();
-                        console.log(email);
-                        googleProvider.setCustomParameters({ login_hint: email });
-                        signInWithPopup(auth, googleProvider).then(google => {
-                            console.log("google", google);
-                            linkWithCredential(google.user, authCredential)
-                                .then((usercred) => {
-                                    var user = usercred.user;
-                                    console.log("Account linking success", user);
-                                }).catch((error) => {
-                                    console.log("Account linking error", error);
-                                });
-                        }).catch(err => {
-                            console.log(err);
-                        })
-                    } else {
-
-                    }
-                })
-                .catch(err => {
-                    console.log(err);
-                })
-        }).catch(err => {
-            console.log(err);
-        })
-    }
 
     function addUserToDatabase(user) {
         axios.get("/add-user/" + user.user.email).then(
@@ -200,8 +136,8 @@ const LoginPage = () => {
                         onClick={handleGoogleSignIn}
                         id="google-register-btn">Sign in with Google</button>
                     <button
-                        onClick={hadnleGithubSignIn}
-                        id="google-register-btn">Sign in with Github</button>
+                        onClick={handleGithubSignIn}
+                        id="github-register-btn">Sign in with Github</button>
                 </form>
             </div >
         </div>

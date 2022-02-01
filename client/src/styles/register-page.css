@@ -130,3 +130,23 @@
   background-color: rgb(207, 154, 154);
   cursor: default;
 }
+
+#register-main #github-register-btn {
+  padding: 8px 10px;
+  font-size: 24px;
+  width: 100%;
+  background-color: white;
+  margin-top: 30px;
+  color: rgb(49, 49, 49);
+  border: 1px solid rgb(49, 49, 49);
+  cursor: pointer;
+}
+#register-main #github-register-btn:hover {
+  background-color: rgb(235, 235, 235);
+}
+#register-main #github-register-btn:disabled {
+  color: rgb(34, 34, 34);
+  border: 1px solid rgb(34, 34, 34);
+  background-color: rgb(167, 167, 167);
+  cursor: default;
+}

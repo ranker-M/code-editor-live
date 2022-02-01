@@ -10,7 +10,7 @@ const RegisterPage = () => {
     const [email, setEmail] = useState('')
     const [password, setPasword] = useState('')
     const [password2, setPasword2] = useState('')
-    const { register, signInWithGoogle, sendEmailForVerification } = useAuth();
+    const { register, signInWithGoogle, sendEmailForVerification, linkAccounts, signInWithGithub } = useAuth();
     const errBox = document.getElementById("error-box");
     const buttons = document.querySelectorAll("#register-wrapper button");
     const { setMessageBox } = useMessageBox();
@@ -34,7 +34,7 @@ const RegisterPage = () => {
                 errBox.innerHTML = "";
 
                 // add new user to db
-                registerUserToDb(res);
+                addUserToDatabase(res);
             })
             .catch((err) => {
                 if (err.message.indexOf("already") != -1) {
@@ -47,43 +47,73 @@ const RegisterPage = () => {
             })
     }
 
-    function registerUserToDb(userObj) {
-        axios.get("/add-user/" + userObj.user.email).then(
+    function addUserToDatabase(user) {
+        axios.get("/add-user/" + user.user.email).then(
             res => {
                 setMessageBox("User successfully created", "lightgreen");
-                handleEmailVerification(userObj);
             }).
             catch(err => {
                 // console.log(err.response.data);
                 if (err.response.data.indexOf("duplicate key error") != -1) {
-                    handleEmailVerification(userObj);
-                } else setMessageBox(err.response.data, "red");
+                    setMessageBox("Login successful", "lightgreen");
+                } else
+                    setMessageBox(err.response.data, "red");
             });
     }
 
     function handleEmailVerification(res) {
-        console.log(res.user);
-        console.log("verified", res.user.emailVerified);
+        const errBox = document.getElementById("error-box");
         if (!res.user.emailVerified) {
             sendEmailForVerification(res.user).then((result) => {
                 setMessageBox("Please verify your email", "orangered");
+                console.log(result);
                 errBox.style.backgroundColor = "darkviolet";
                 errBox.innerHTML = "Email not verified. A verification mail sent to your email. Please check your email.";
                 errBox.style.display = "block";
             }).catch(err => {
-                console.log(err);
+                if (err.message.indexOf("too-many-requests") !== -1) {
+                    errBox.innerHTML = "Verify your account to login. A verification mail already sent to your email address."
+                } else errBox.innerHTML = err.message;
                 errBox.style.backgroundColor = "red";
-                errBox.innerHTML = err.message;
                 errBox.style.display = "block";
                 buttons.forEach(el => el.disabled = false);
             });
 
         } else {
             setMessageBox("Login successful", "lightgreen");
-            navigate("/profile", { replace: true });
+            navigate("/profile");
         }
     }
 
+    function handleGithubSignIn() {
+        signInWithGithub().then(user => {
+            console.log(user);
+            if (user._tokenResponse?.isNewUser) {
+                addUserToDatabase(user);
+            }
+            handleEmailVerification(user);
+        }).catch(err => {
+            setMessageBox(`Account linking needed`, "red");
+            if (err.message.indexOf('auth/account-exists-with-different-credential') != -1) {
+                const errBox = document.getElementById("error-box");
+                errBox.innerHTML = "This email is already being used. Please enter your account with other providers. We will link your account so you can use this method from now on.";
+                errBox.style.backgroundColor = "red";
+                errBox.style.display = "block";
+                buttons.forEach(el => el.disabled = false);
+                linkAccounts(err);
+            }
+        })
+    }
+    function handleGoogleSignIn() {
+        signInWithGoogle().then(user => {
+            if (user._tokenResponse?.isNewUser) {
+                addUserToDatabase(user);
+            }
+            handleEmailVerification(user);
+        }).catch(err => {
+            setMessageBox(err.message, "red");
+        });
+    }
     return (
         <div id="register-main">
             <h1>Register</h1>
@@ -115,20 +145,15 @@ const RegisterPage = () => {
                     <button type="submit" id="create-account">Create an account</button>
                     <div id="line-between-login"></div>
                     <button
-                        onClick={() => {
-                            signInWithGoogle()
-                                .then(user => {
-                                    // console.log(user);      
-                                    if (user._tokenResponse?.isNewUser) {
-                                        registerUserToDb(user.user.email);
-                                    } else setMessageBox("Login successful", "lightgreen");
-                                })
-                                .catch(err => {
-                                    // console.log(err);
-                                    setMessageBox(err.message, "red");
-                                });
-                        }}
-                        id="google-register-btn">Sign in with Google</button>
+                        onClick={handleGoogleSignIn}
+                        id="google-register-btn">Sign in with Google
+                    </button>
+
+                    <button
+                        onClick={handleGithubSignIn}
+                        id="github-register-btn">Sign in with Github
+                    </button>
+
                 </form>
             </div >
         </div>

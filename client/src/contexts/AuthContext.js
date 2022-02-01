@@ -35,6 +35,7 @@ const AuthContext = createContext({
     resetPassword: () => Promise,
     sendEmailForVerification: () => Promise,
     confirmEmailVerification: () => Promise,
+    linkAccounts: () => Function
 })
 
 
@@ -43,6 +44,7 @@ export const useAuth = () => useContext(AuthContext)
 export default function AuthContextProvider({ children }) {
     const [currentUser, setCurrentUser] = useState({ loading: true });
     const { setMessageBox } = useMessageBox();
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, user => {
             if (user) setCurrentUser(user);
@@ -93,6 +95,30 @@ export default function AuthContextProvider({ children }) {
         return applyActionCode(auth, oobCode);
     }
 
+    function linkAccounts(err) {
+        const authCredential = GithubAuthProvider.credentialFromError(err);
+        const octokit = new Octokit({ auth: authCredential.accessToken });
+        octokit.request("GET /user/emails", {
+            org: "octokit",
+            type: "private"
+        }).then(res => {
+            const email = res.data.filter(el => el.primary)[0].email;
+            onAuthStateChanged(auth, () => {
+                if (auth.currentUser?.email == email) {
+                    linkWithCredential(auth.currentUser, authCredential)
+                        .then((usercred) => {
+                            var user = usercred.user;
+                            console.log("Account linking success", user);
+                            setMessageBox("Accounts linked successfully", "ligthgreen");
+                        }).catch((error) => {
+                            console.log("Account linking error", error);
+                        });
+                }
+            })
+        }).catch(err => {
+            console.log(err);
+        })
+    }
     const value = {
         currentUser,
         register,
@@ -104,7 +130,7 @@ export default function AuthContextProvider({ children }) {
         resetPassword,
         sendEmailForVerification,
         confirmEmailVerification,
-
+        linkAccounts
     }
 
     return <AuthContext.Provider value={value}>

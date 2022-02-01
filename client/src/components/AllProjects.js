@@ -45,7 +45,9 @@ const AllProjects = (props) => {
                         document.querySelector("#result-placeholder").innerHTML = "No match";
                     }
                 }).
-                catch(err => console.log(err));
+                catch(err => {
+                    if (err.message.indexOf("setting 'innerHTML'") !== -1) console.log(err)
+                });
         }
     }, [currentUser, renderState, props.searchValue]);
 

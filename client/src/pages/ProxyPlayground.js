@@ -88,6 +88,7 @@ const ProxyPlayground = (props) => {
             })
             .catch(err => {
                 console.log(err);
+                setOutput({ time: "0.00", output: err.response.data });
             });
     }
 
