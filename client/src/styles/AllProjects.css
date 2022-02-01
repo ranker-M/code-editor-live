@@ -69,6 +69,32 @@
   justify-content: space-around;
 }
 
+#all-project-wrapper #all-project-create-button {
+  border-radius: 50px;
+  background-color: rgb(0, 141, 0);
+  color: white;
+  padding: 12px 0px;
+  font-size: 25px;
+}
+
+#all-project-wrapper #all-project-create-button:hover {
+  background-color: rgb(3, 172, 3);
+  cursor: pointer;
+}
+
+#all-project-wrapper #more-about-compilers {
+  border-radius: 50px;
+  background-color: rgb(0, 0, 0);
+  color: white;
+  padding: 12px 0px;
+  font-size: 25px;
+}
+
+#all-project-wrapper #more-about-compilers:hover {
+  background-color: rgb(58, 58, 58);
+  cursor: pointer;
+}
+
 @media only screen and (min-width: 1920px) {
   .AllProjects-grid-wrapper {
     grid-template-columns: repeat(4, 350px);

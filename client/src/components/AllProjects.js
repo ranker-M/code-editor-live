@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import '../styles/AllProjects.css';
 import { useAuth } from '../contexts/AuthContext';
 import { useEffect, useState } from 'react';
@@ -105,7 +105,13 @@ const AllProjects = (props) => {
                                 <button className='all-project-button delete' onClick={(e) => handleDelete(e, project)}>Delete</button>
                             </div>
                         </div>
-                    }) : <p id="result-placeholder">Doesn't have any project yet</p>}
+                    }) : <NavLink to="" id="create-project"
+                        onClick={props.handleCreateProject} id="all-project-create-button">
+                        Create New Project</NavLink>
+                }
+                {recentlyProjects?.length == 0 && <NavLink to="" id="more-about-compilers"
+                    onClick={() => props.setCompilerList(true)} >
+                    Learn About Compilers</NavLink>}
             </div>}
 
 

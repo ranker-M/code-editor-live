@@ -7,7 +7,7 @@ import { useAuth } from "../contexts/AuthContext";
 import '../styles/profile-page.css';
 import qs from 'qs';
 import { useMessageBox } from "../contexts/MessageBox";
-
+import { compilerList } from "../components/CodeEditorImports";
 
 const ProfilePage = () => {
     const { logout, currentUser } = useAuth();
@@ -18,6 +18,7 @@ const ProfilePage = () => {
     const navigate = useNavigate();
     const [searchValue, setSearchValue] = useState("");
     const { state } = useLocation();
+    const [compiler, setCompilerList] = useState(false);
 
     useEffect(() => {
         // console.log("Profile page:", state);
@@ -93,8 +94,10 @@ const ProfilePage = () => {
                         Create Project</NavLink>
                     <NavLink to="/" id="slider-home" className="slider-btn">
                         Home</NavLink>
-                    <NavLink to="" id="all-projects" className="slider-btn">
+                    <NavLink to="" id="all-projects" onClick={() => setCompilerList(false)} className="slider-btn">
                         All Projects</NavLink>
+                    <NavLink to="" id="compiler-list" onClick={() => setCompilerList(true)} className="slider-btn">
+                        Compiler List</NavLink>
                     <NavLink to="" onClick={handleLogout} id="profile-navbar-logout-btn">Logout</NavLink>
                 </div>
             </div>
@@ -109,10 +112,30 @@ const ProfilePage = () => {
                     />
                 </div>
                 <main id="profile-main">
-                    <AllProjects searchValue={searchValue} />
+                    {!compiler && <AllProjects searchValue={searchValue}
+                        handleCreateProject={handleCreateProject} setCompilerList={setCompilerList} />}
+                    {compiler && <div id="compiler-list">
+                        <h1>Compiler List</h1>
+                        <p>This project compiles codes via Sphere Engine Compilers and the list of compilers available right now is below.</p>
+                        <p>Some features may work differently than you expected so if there is a such thing please learn more about the compiler. For example in javascript:<br />
+                            This won't work <code>console.log("Hello World!")</code>
+                            <br />You should use <code>print("Hello World")</code> for output.
+                        </p>
+                        <p>Here is the full list,<a href="https://sphere-engine.com/supported-languages" target="_blank">Sphere Engine Compiler</a>. You can learn more about compilers from here.</p>
+                        <ul id="compiler-list-ul">
+                            {Object.values(compilerList).map(compiler => {
+                                return <li className="compiler-list-il">{compiler.name + ", (id:" + compiler.id + ")"}</li>;
+                            })}
+                        </ul>
+                        <p>This project is using free trial of Sphere Engine which expires at <strong>Feb. 15, 2022, 4:30 p.m</strong>.
+                            After this date, you may see <strong>"Compiler Errors"</strong> due to the expired access tokens for Sphere Engine Compiler API.</p>
+                        <p>You can contact me from <strong>meric99gunduz@gmail.com</strong> email address for your questions or suggestions.</p>
+                        <p>Happy Coding</p>
+                    </div>}
+
                 </main>
             </section>
-        </div>
+        </div >
     );
 }
 

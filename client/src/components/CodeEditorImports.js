@@ -220,5 +220,51 @@ else:
   // "tsx": 
 }
 
+const compilerList = {
+  cpp: {
+    id: 1,
+    name: 'C++ [GCC]',
+    short: 'C++',
+  },
+  java: {
+    id: 55,
+    name: 'Java - legacy',
+    short: 'JAVA7',
+  },
+  javascript: {
+    id: 35,
+    name: 'JavaScript [Rhino]',
+    short: 'Rhino',
+  },
+  php: {
+    id: 29,
+    name: 'PHP',
+    short: 'PHP',
+  },
+  python: {
+    id: 116,
+    name: 'Python 3.x',
+    short: 'PYTH3',
+  },
+  rust: {
+    id: 93,
+    name: 'Rust',
+    short: 'rust',
+  },
+  "sql-schema": {
+    id: 40,
+    name: 'SQLite - schema',
+    short: 'SQLITE3',
+  }, "sql-queries": {
+    id: 52,
+    name: 'SQLite - queries',
+    short: '',
+  },
+  typescript: {
+    id: 57,
+    name: 'TypeScript',
+    short: 'TCS',
+  },
+}
 
-export { optionList, exampleCode };
+export { optionList, exampleCode, compilerList };

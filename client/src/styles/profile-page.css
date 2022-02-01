@@ -275,3 +275,27 @@
 #delete-project-window h1 {
   margin: 5px;
 }
+
+#compiler-list {
+  padding: 20px;
+  padding-top: 0px;
+}
+
+#compiler-list p {
+  line-height: 2rem;
+}
+
+#compiler-list code {
+  background-color: white;
+  padding: 3px 8px;
+}
+
+#profile-main #compiler-list a {
+  all: unset;
+  color: rgb(25, 58, 146);
+  cursor: pointer;
+}
+
+#profile-main #compiler-list a:hover {
+  color: rgb(64, 115, 255);
+}

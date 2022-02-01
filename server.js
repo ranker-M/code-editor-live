@@ -199,7 +199,6 @@ const compilers = {
         name: 'C++ [GCC]',
         short: 'C++',
     },
-    html: "",
     java: {
         id: 55,
         name: 'Java - legacy',
