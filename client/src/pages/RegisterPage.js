@@ -51,6 +51,7 @@ const RegisterPage = () => {
         axios.get("/add-user/" + user.user.email).then(
             res => {
                 setMessageBox("User successfully created", "lightgreen");
+                handleEmailVerification(user);
             }).
             catch(err => {
                 // console.log(err.response.data);
