@@ -108,10 +108,9 @@ export default function AuthContextProvider({ children }) {
                     linkWithCredential(auth.currentUser, authCredential)
                         .then((usercred) => {
                             var user = usercred.user;
-                            console.log("Account linking success", user);
                             setMessageBox("Accounts linked successfully", "ligthgreen");
                         }).catch((error) => {
-                            console.log("Account linking error", error);
+                            // console.log("Account linking error", error);
                         });
                 }
             })

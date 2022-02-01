@@ -65,9 +65,6 @@ const ResizableBox = ({ children, props }) => {
     };
 
     useEffect(() => {
-        console.log("props", props);
-        // console.log(refer);
-        // const ele = document.querySelector('.resizeMe');
         var ele = refer.current;
         const resizers = ele.querySelectorAll('.resizer');
         [].forEach.call(resizers, function (resizer) {

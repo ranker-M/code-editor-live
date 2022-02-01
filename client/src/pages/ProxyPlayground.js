@@ -26,7 +26,6 @@ const ProxyPlayground = (props) => {
             setlanguage(language);
             setCode(code);
             setProjectName(projectName);
-            console.log(proxyProject);
         }
     }, [])
 

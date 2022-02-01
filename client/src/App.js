@@ -106,7 +106,6 @@ function RequireAuth({ children }) {
 function ActionPages() {
 	const [searchParams, setSearchParams] = useSearchParams();
 
-	console.log(searchParams);
 	let mode = searchParams.get("mode");
 	let oobCode = searchParams.get("oobCode");
 	if (mode == "verifyEmail") return <Navigate to="/verify-email" state={{ oobCode: oobCode }} />

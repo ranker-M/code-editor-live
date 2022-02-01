@@ -46,7 +46,7 @@ const AllProjects = (props) => {
                     }
                 }).
                 catch(err => {
-                    if (err.message.indexOf("setting 'innerHTML'") !== -1) console.log(err)
+                    if (err.message.indexOf("innerHTML") === -1) console.log(err)
                 });
         }
     }, [currentUser, renderState, props.searchValue]);

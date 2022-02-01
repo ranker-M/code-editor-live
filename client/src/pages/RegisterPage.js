@@ -55,7 +55,7 @@ const RegisterPage = () => {
             catch(err => {
                 // console.log(err.response.data);
                 if (err.response.data.indexOf("duplicate key error") != -1) {
-                    setMessageBox("Login successful", "lightgreen");
+                    handleEmailVerification(user);
                 } else
                     setMessageBox(err.response.data, "red");
             });
@@ -66,7 +66,6 @@ const RegisterPage = () => {
         if (!res.user.emailVerified) {
             sendEmailForVerification(res.user).then((result) => {
                 setMessageBox("Please verify your email", "orangered");
-                console.log(result);
                 errBox.style.backgroundColor = "darkviolet";
                 errBox.innerHTML = "Email not verified. A verification mail sent to your email. Please check your email.";
                 errBox.style.display = "block";
@@ -87,7 +86,6 @@ const RegisterPage = () => {
 
     function handleGithubSignIn() {
         signInWithGithub().then(user => {
-            console.log(user);
             if (user._tokenResponse?.isNewUser) {
                 addUserToDatabase(user);
             }

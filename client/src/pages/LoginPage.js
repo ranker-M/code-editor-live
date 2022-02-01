@@ -74,7 +74,6 @@ const LoginPage = () => {
 
     function handleGithubSignIn() {
         signInWithGithub().then(user => {
-            console.log(user);
             if (user._tokenResponse?.isNewUser) {
                 addUserToDatabase(user);
             }
@@ -101,7 +100,7 @@ const LoginPage = () => {
             catch(err => {
                 // console.log(err.response.data);
                 if (err.response.data.indexOf("duplicate key error") != -1) {
-                    setMessageBox("Login successful", "lightgreen");
+                    handleEmailVerification(user);
                 } else
                     setMessageBox(err.response.data, "red");
             });
