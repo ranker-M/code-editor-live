@@ -68,8 +68,7 @@ const LoginPage = () => {
             }
             handleEmailVerification(user);
         }).catch(err => {
-            console.log(err.message);
-            if (err.message.indexOf("auth/popup-closed-by-user") === -1) {
+            if (err.message.indexOf("cancelled-popup") === -1 && err.message.indexOf("popup-closed") === -1) {
                 setMessageBox(err.message, "red");
             }
         });
@@ -82,7 +81,7 @@ const LoginPage = () => {
             }
             handleEmailVerification(user);
         }).catch(err => {
-            if (err.message.indexOf("auth/popup-closed-by-user") === -1) {
+            if (err.message.indexOf("cancelled-popup") === -1 && err.message.indexOf("popup-closed") === -1) {
                 setMessageBox(err.message, "red");
             }
             if (err.message.indexOf('auth/account-exists-with-different-credential') != -1) {
