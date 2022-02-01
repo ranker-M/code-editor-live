@@ -92,8 +92,11 @@ const RegisterPage = () => {
             }
             handleEmailVerification(user);
         }).catch(err => {
-            setMessageBox(`Account linking needed`, "red");
+            if (err.message.indexOf("auth-popup-closed-by-user") === -1) {
+                setMessageBox(err.message, "red");
+            }
             if (err.message.indexOf('auth/account-exists-with-different-credential') != -1) {
+                setMessageBox(`Account linking needed`, "red");
                 const errBox = document.getElementById("error-box");
                 errBox.innerHTML = "This email is already being used. Please enter your account with other providers. We will link your account so you can use this method from now on.";
                 errBox.style.backgroundColor = "red";
@@ -110,7 +113,9 @@ const RegisterPage = () => {
             }
             handleEmailVerification(user);
         }).catch(err => {
-            setMessageBox(err.message, "red");
+            if (err.message.indexOf("auth-popup-closed-by-user") === -1) {
+                setMessageBox(err.message, "red");
+            }
         });
     }
     return (
