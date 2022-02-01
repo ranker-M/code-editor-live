@@ -11,7 +11,7 @@ Source code: https://github.com/ranker-M/code-editor-live
 <br>**Authentication:** Firebase
 <br>**Database:** MongoDB
 <br>**Code Editor:** CodeMirror
-<br>**Compiler API:** Sphere Engine Compilers (free trial ends: Jan. 29, 2022, 12:29 a.m.)
+<br>**Compiler API:** Sphere Engine Compilers (free trial ends:  Feb. 15, 2022, 4:30 p.m.)
 <br>**Deployed:** Heroku
 
 **Note:** I used Sphere Engine Compiler API to compile codes and I am using free-trial version of it. If I don't renew it, 
