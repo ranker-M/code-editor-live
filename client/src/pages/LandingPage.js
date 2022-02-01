@@ -24,8 +24,8 @@ const LandingPage = (props) => {
                 {props.mobile ?
                     <h2 style={{ "color": "white" }}>Unfortunately we don't suppport mobile devices. You can use LCodeSharing only in a computer.</h2>
                     : <div className="center">
-                        <h1>Collaborative Online Code Compiler</h1>
-                        <h2>Code with your team and friends</h2>
+                        <h1>Online Code Editor and Compiler</h1>
+                        <h2>Code, save and compile your project</h2>
                         <Link to="/playground" className="btn-white btn btn-animate">Start Coding Now</Link>
                     </div>}
             </div>
